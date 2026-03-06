@@ -2,6 +2,7 @@ import { Head, Link } from '@inertiajs/react';
 import FrontendLayout from '@/layouts/frontend-layout';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import HomeHero from '@/components/frontend/home-hero';
 import { Shield, Image as ImageIcon, HelpCircle, Star } from 'lucide-react';
 import { gallery, faqs, quote } from '@/routes';
 import trellis from '@/routes/trellis';
@@ -45,6 +46,7 @@ export default function HomePage() {
             </Head>
 
             {/* Hero with background image */}
+            <HomeHero />
 
 
             {/* Trust bar: logos + testimonials */}
