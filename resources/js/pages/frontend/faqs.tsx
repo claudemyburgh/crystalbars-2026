@@ -8,7 +8,7 @@ import {
 import { Button } from '@/components/ui/button';
 import FrontendLayout from '@/layouts/frontend-layout';
 import { quote } from '@/routes';
-import OwnerCTA from '@/components/frontend/owner-cta';
+
 
 type Faq = { id: number; question: string; answer: string };
 
@@ -70,8 +70,6 @@ export default function FaqsPage({ faqs }: { faqs: Faq[] }) {
                     </Accordion>
                 </div>
             </section>
-
-            <OwnerCTA />
         </FrontendLayout>
     );
 }

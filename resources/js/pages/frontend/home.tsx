@@ -20,8 +20,8 @@ import BarsImage from '@/../images/bars.png';
 import WhatsAppImage from '@/../images/examples/WhatsApp Image 2022-11-19 at 17.39.40.jpg';
 import HomeHero from '@/components/frontend/home-hero';
 import OwnerCTA from '@/components/frontend/owner-cta';
-import MarqueeReviews from '@/components/shadcn-space/marquee/marquee-reviews';
 import Gallery01 from '@/components/shadcn-space/gallery/gallery-01';
+import MarqueeReviews from '@/components/shadcn-space/marquee/marquee-reviews';
 import {
     Accordion,
     AccordionItem,
@@ -29,12 +29,12 @@ import {
     AccordionContent,
 } from '@/components/ui/accordion';
 import { Button } from '@/components/ui/button';
+import { DotPattern } from '@/components/ui/dot-pattern';
 import { Highlighter } from '@/components/ui/highlighter';
 import FrontendLayout from '@/layouts/frontend-layout';
+import { cn } from '@/lib/utils';
 import { gallery, faqs, quote } from '@/routes';
 import trellis from '@/routes/trellis';
-import { cn } from '@/lib/utils';
-import { DotPattern } from '@/components/ui/dot-pattern';
 
 type Faq = {
     id: number;
@@ -248,6 +248,19 @@ export default function HomePage({ faqs: dbFaqs }: HomePageProps) {
                                     <CheckCircle2 className="mt-0.5 size-5 text-primary" />
                                     <span>
                                         Quick and easy professional installation
+                                    </span>
+                                </li>
+                                <li className="flex items-start gap-3">
+                                    <CheckCircle2 className="mt-0.5 size-5 text-primary" />
+                                    <span>
+                                        Clear view - no obstruction of your outdoor scenery
+                                    </span>
+                                </li>
+
+                                <li className="flex items-start gap-3">
+                                    <CheckCircle2 className="mt-0.5 size-5 text-primary" />
+                                    <span>
+                                        Enhanced aesthetics modern and elegant design
                                     </span>
                                 </li>
                             </ul>
@@ -655,8 +668,7 @@ export default function HomePage({ faqs: dbFaqs }: HomePageProps) {
                 </div>
             </section>
 
-            {/* Owner CTA - Reusable Component */}
-            <OwnerCTA />
+
 
             {/* Quick links - Footer */}
             <section className="bg-background py-12">

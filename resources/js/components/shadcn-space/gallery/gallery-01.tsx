@@ -1,8 +1,8 @@
-import { Card } from '@/components/ui/card';
-import Gallery1 from '@/../images/examples/WhatsApp Image 2022-11-19 at 17.38.30.jpg';
+import Gallery4 from '@/../images/examples/75279256_2426432367595402_7017356600314691584_n.jpg';
 import Gallery2 from '@/../images/examples/WhatsApp Image 2022-11-19 at 17.38.31.jpg';
 import Gallery3 from '@/../images/examples/WhatsApp Image 2022-11-19 at 17.38.32.jpg';
-import Gallery4 from '@/../images/examples/75279256_2426432367595402_7017356600314691584_n.jpg';
+import Gallery1 from '@/../images/stand.jpg';
+import { Card } from '@/components/ui/card';
 
 const Gallery = () => {
     return (
@@ -14,7 +14,7 @@ const Gallery = () => {
                         <img
                             src={Gallery1}
                             alt="Crystal Clear Burglar Bars"
-                            className="h-64 w-full object-cover transition-transform duration-500 group-hover:scale-105 md:h-120"
+                            className="h-64 w-full object-cover transition-transform duration-500 group-hover:scale-105 md:h-180"
                         />
                         <div className="absolute bottom-0 z-10 flex flex-col gap-1 ps-4 pb-4">
                             <h3 className="text-xl font-semibold text-white">
@@ -33,7 +33,7 @@ const Gallery = () => {
                             <img
                                 src={Gallery2}
                                 alt="Trellis Gates"
-                                className="h-40 w-full object-cover transition-transform duration-500 group-hover:scale-105 md:h-48"
+                                className="h-40 w-full object-cover transition-transform duration-500 group-hover:scale-105 md:h-90"
                             />
 
                             <div className="absolute bottom-0 z-10 flex flex-col gap-1 ps-4 pb-4">
@@ -52,7 +52,7 @@ const Gallery = () => {
                                 <img
                                     src={Gallery3}
                                     alt="Security Doors"
-                                    className="h-40 w-full object-cover transition-transform duration-500 group-hover:scale-105 md:h-48"
+                                    className="h-40 w-full object-cover transition-transform duration-500 group-hover:scale-105 md:h-90"
                                 />
 
                                 <div className="absolute bottom-0 z-10 flex flex-col gap-1 ps-3 pb-3">
@@ -69,7 +69,7 @@ const Gallery = () => {
                                 <img
                                     src={Gallery4}
                                     alt="Window Security"
-                                    className="h-40 w-full object-cover transition-transform duration-500 group-hover:scale-105 md:h-48"
+                                    className="h-40 w-full object-cover transition-transform duration-500 group-hover:scale-105 md:h-90"
                                 />
 
                                 <div className="absolute bottom-0 z-10 flex flex-col gap-1 ps-3 pb-3">

@@ -1,6 +1,6 @@
 import { Head } from '@inertiajs/react';
 import FrontendLayout from '@/layouts/frontend-layout';
-import OwnerCTA from '@/components/frontend/owner-cta';
+
 
 export default function GalleryPage() {
     const placeholders = Array.from({ length: 9 }).map((_, i) => i);
@@ -21,8 +21,6 @@ export default function GalleryPage() {
                     ))}
                 </div>
             </section>
-
-            <OwnerCTA />
         </FrontendLayout>
     );
 }

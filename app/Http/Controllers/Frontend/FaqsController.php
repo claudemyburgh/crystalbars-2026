@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers\Frontend;
 
-use Illuminate\Http\Request;
 use App\Models\Faq;
+use Illuminate\Http\Request;
 use Inertia\Inertia;
 use Inertia\Response;
 

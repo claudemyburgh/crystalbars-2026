@@ -1,8 +1,8 @@
 <?php
 
 use App\Mail\QuoteRequestSent;
-use Illuminate\Support\Facades\Mail;
 use Illuminate\Foundation\Testing\WithoutMiddleware;
+use Illuminate\Support\Facades\Mail;
 
 uses(WithoutMiddleware::class);
 

@@ -1,11 +1,11 @@
 <?php
 
-use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\Frontend\HomeController;
 use App\Http\Controllers\Frontend\FaqsController;
 use App\Http\Controllers\Frontend\GalleryController;
+use App\Http\Controllers\Frontend\HomeController;
 use App\Http\Controllers\Frontend\QuoteController;
 use App\Http\Controllers\Frontend\TrellisGatesController;
+use Illuminate\Support\Facades\Route;
 
 Route::get('/', HomeController::class)->name('home');
 
