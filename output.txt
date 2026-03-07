@@ -1,0 +1,7 @@
+I have updated the button label in `resources/js/pages/frontend/quote.tsx` as requested.
+
+The button now displays:
+*   "Request Quote" when not processing.
+*   "Requesting..." when the form is being submitted.
+
+I am finished with this task.

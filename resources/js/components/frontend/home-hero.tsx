@@ -86,14 +86,14 @@ export default function HomeHero() {
                         className="text-4xl font-black tracking-tight text-balance text-white text-shadow-2xs text-shadow-black/30 sm:text-5xl md:text-6xl"
                     >
                         Experience the{' '}
-                        <Highlighter animationDuration={4000} isView={true} color={'#25a4df'} action={`highlight`}>
+                        <Highlighter animationDuration={1200} isView={true} color={'#25a4df'} action={`highlight`}>
                             Best
                         </Highlighter>{' '}
                         in Home Security with Transparent{' '}
-                        <Highlighter animationDuration={4000} isView={true} color={'goldenrod'} action={`highlight`}>
+                        <Highlighter animationDuration={1200} isView={true} color={'goldenrod'} strokeWidth={10} action={`underline`}>
                             Polycarbonate
                         </Highlighter>{' '}
-                        <Highlighter animationDuration={4000} isView={true} color={'#25a4df'} action={`highlight`}>
+                        <Highlighter animationDuration={1200} isView={true} color={'#25a4df'} action={`highlight`}>
                             Burglar Bars
                         </Highlighter>
                     </h1>
@@ -152,7 +152,7 @@ export default function HomeHero() {
                             aria-hidden
                         />
                         <div className="text-md mb-3 font-semibold text-foreground/80">
-                            Why homeowners choose <Highlighter animationDuration={4000} isView={true} color={'#25a4df'} action={`underline`}> Crystal Bars</Highlighter>
+                            Why homeowners choose <Highlighter animationDuration={1200} isView={true} color={'#25a4df'} action={`underline`}> Crystal Bars</Highlighter>
                         </div>
                         <ul className="space-y-2.5 text-sm text-foreground/90">
                             <li className="flex items-start gap-3">

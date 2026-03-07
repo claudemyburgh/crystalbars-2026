@@ -5,6 +5,7 @@ import HendryImage from '@/../images/hendry.jpg';
 import { Button } from '@/components/ui/button';
 import { quote } from '@/routes';
 import Wrapper from '@/components/frontend/wrapper';
+import { ShineBorder } from '../ui/shine-border';
 
 export default function OwnerCTA() {
     return (
@@ -27,6 +28,16 @@ export default function OwnerCTA() {
                     <div className="flex flex-col items-center text-center md:items-start md:text-left">
                         <div className="relative mb-6">
                             <div className="relative overflow-hidden rounded-2xl border-4 border-primary/20 shadow-2xl">
+                                <ShineBorder
+                                    borderWidth={4}
+                                    duration={15}
+                                    shineColor={[
+                                        '#A07CFE',
+                                        '#25A4DFFF',
+                                        '#FFBE7B',
+                                    ]}
+                                />
+
                                 <img
                                     src={HendryImage}
                                     alt="Hendry Ollewagen - Owner"

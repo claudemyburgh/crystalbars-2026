@@ -16,6 +16,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
 Route::get('/trellis-gates', TrellisGatesController::class)->name('trellis.gates');
 Route::get('/gallery', GalleryController::class)->name('gallery');
 Route::get('/faqs', FaqsController::class)->name('faqs');
-Route::get('/quote', QuoteController::class)->name('quote');
+Route::get('/quote', [QuoteController::class, 'create'])->name('quote');
+Route::post('/quote', [QuoteController::class, 'store'])->name('quote.store');
 
 require __DIR__.'/settings.php';

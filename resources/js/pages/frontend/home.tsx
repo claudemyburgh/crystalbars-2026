@@ -33,6 +33,8 @@ import { Highlighter } from '@/components/ui/highlighter';
 import FrontendLayout from '@/layouts/frontend-layout';
 import { gallery, faqs, quote } from '@/routes';
 import trellis from '@/routes/trellis';
+import { cn } from '@/lib/utils';
+import { DotPattern } from '@/components/ui/dot-pattern';
 
 type Faq = {
     id: number;
@@ -282,8 +284,18 @@ export default function HomePage({ faqs: dbFaqs }: HomePageProps) {
                         {benefits.map((benefit, idx) => (
                             <div
                                 key={idx}
-                                className="group relative rounded-2xl border bg-background p-6 shadow-sm transition-all hover:scale-[1.02] hover:shadow-lg"
+                                className={`group relative overflow-hidden rounded-2xl border bg-background p-6 shadow-sm transition-all hover:scale-[1.02] hover:shadow-lg`}
                             >
+                                <DotPattern
+                                    width={20}
+                                    height={20}
+                                    cx={1}
+                                    cy={1}
+                                    cr={1}
+                                    className={cn(
+                                        "[mask-image:linear-gradient(to_bottom_right,white,transparent,transparent)]"
+                                    )}
+                                />
                                 <div className="absolute inset-0 rounded-2xl bg-linear-to-br from-primary/5 to-transparent opacity-0 transition-opacity group-hover:opacity-100" />
                                 <div className="relative">
                                     <div className="mb-3 inline-flex size-12 items-center justify-center rounded-xl bg-primary/10">

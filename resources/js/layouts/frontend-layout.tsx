@@ -3,6 +3,7 @@ import { FrontendNavLinks } from '@/hooks/use-frontend-routes';
 import FrontendTopNav from '@/layouts/frontend/top-nav';
 import FrontendFooterNav from '@/layouts/frontend/footer-nav';
 import FrontendNoticeBar from '@/layouts/frontend/notice-bar';
+import { Toaster } from '@/components/ui/sonner';
 
 export type FrontendLayoutProps = PropsWithChildren<{
     links?: FrontendNavLinks;
@@ -24,6 +25,7 @@ export default function FrontendLayout({ children, links }: FrontendLayoutProps)
             <FrontendTopNav links={mergedLinks} />
             <main className="flex-1">{children}</main>
             <FrontendFooterNav links={mergedLinks} />
+            <Toaster position={`top-right`} />
         </div>
     );
 }
