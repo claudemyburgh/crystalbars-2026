@@ -3,6 +3,7 @@ import FrontendLayout from '@/layouts/frontend-layout';
 import { Star } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { quote } from '@/routes';
+import OwnerCTA from '@/components/frontend/owner-cta';
 
 export default function TrellisGatesPage() {
     /* function FAQsAccordion() {
@@ -103,10 +104,12 @@ export default function TrellisGatesPage() {
                     <div className="grid items-center gap-8 md:grid-cols-2">
                         <div>
                             <h1 className="text-3xl font-semibold tracking-tight sm:text-4xl">
-                                Secure your home with premium trellis gates and doors
+                                Secure your home with premium trellis gates and
+                                doors
                             </h1>
                             <p className="mt-3 text-neutral-600 dark:text-neutral-300">
-                                We design, manufacture, and install high‑quality security solutions tailored to your space.
+                                We design, manufacture, and install high‑quality
+                                security solutions tailored to your space.
                             </p>
                             <div className="mt-6">
                                 <Button asChild size="lg">
@@ -116,7 +119,8 @@ export default function TrellisGatesPage() {
                         </div>
                         <div className="rounded-xl border border-sidebar-border/60 bg-gradient-to-br from-primary/10 to-accent/10 p-8">
                             <div className="text-sm text-neutral-700 dark:text-neutral-200">
-                                Trusted local craftsmanship. Fast lead times. Professional installation.
+                                Trusted local craftsmanship. Fast lead times.
+                                Professional installation.
                             </div>
                         </div>
                     </div>
@@ -136,6 +140,8 @@ export default function TrellisGatesPage() {
 
                 <FAQsAccordion />
             </section> */}
+
+            <OwnerCTA />
         </FrontendLayout>
     );
 }

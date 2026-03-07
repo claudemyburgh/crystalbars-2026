@@ -2,12 +2,11 @@ import { Link } from '@inertiajs/react';
 import {  Shield, Eye, Timer } from 'lucide-react';
 import { useEffect, useState } from 'react';
 
-import { Button } from '@/components/ui/button';
+import BarsComponent from '@/components/frontend/bars-component';
 import { Highlighter } from '@/components/ui/highlighter';
 import { PlaceholderPattern } from '@/components/ui/placeholder-pattern';
 import { RainbowButton } from '@/components/ui/rainbow-button';
-import { gallery, quote } from '@/routes';
-import BarsComponent from '@/components/frontend/bars-component';
+import { quote } from '@/routes';
 
 export default function HomeHero() {
     // Mount + reduced motion handling for subtle entrance animations and media preferences
@@ -87,14 +86,14 @@ export default function HomeHero() {
                         className="text-4xl font-black tracking-tight text-balance text-white text-shadow-2xs text-shadow-black/30 sm:text-5xl md:text-6xl"
                     >
                         Experience the{' '}
-                        <Highlighter color={'#25a4df'} action={`highlight`}>
+                        <Highlighter animationDuration={4000} isView={true} color={'#25a4df'} action={`highlight`}>
                             Best
                         </Highlighter>{' '}
                         in Home Security with Transparent{' '}
-                        <Highlighter color={'goldenrod'} action={`highlight`}>
+                        <Highlighter animationDuration={4000} isView={true} color={'goldenrod'} action={`highlight`}>
                             Polycarbonate
                         </Highlighter>{' '}
-                        <Highlighter color={'#25a4df'} action={`highlight`}>
+                        <Highlighter animationDuration={4000} isView={true} color={'#25a4df'} action={`highlight`}>
                             Burglar Bars
                         </Highlighter>
                     </h1>
@@ -153,7 +152,7 @@ export default function HomeHero() {
                             aria-hidden
                         />
                         <div className="text-md mb-3 font-semibold text-foreground/80">
-                            Why homeowners choose Crystal Bars
+                            Why homeowners choose <Highlighter animationDuration={4000} isView={true} color={'#25a4df'} action={`underline`}> Crystal Bars</Highlighter>
                         </div>
                         <ul className="space-y-2.5 text-sm text-foreground/90">
                             <li className="flex items-start gap-3">
