@@ -3,7 +3,7 @@ import FrontendLayout from '@/layouts/frontend-layout';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import HomeHero from '@/components/frontend/home-hero';
-import { Shield, Image as ImageIcon, HelpCircle, Star } from 'lucide-react';
+import { Shield, Image as ImageIcon, HelpCircle, Star, CheckCircle2 } from 'lucide-react';
 import { gallery, faqs, quote } from '@/routes';
 import trellis from '@/routes/trellis';
 
@@ -49,21 +49,48 @@ export default function HomePage() {
             <HomeHero />
 
 
+
+            {/* Sales Pitch */}
+            <section aria-labelledby="sales-pitch-title" className="mx-auto w-full my-18 max-w-7xl px-4 pb-16">
+                <div className="grid grid-cols-1 gap-8 md:grid-cols-2">
+                    <div>
+                        <h2 id="sales-pitch-title" className="text-3xl font-black tracking-tight md:text-4xl">
+                            Crystal	clear security for modern homes
+                        </h2>
+                        <p className="mt-3 text-neutral-600 dark:text-neutral-300">
+                            Transparent polycarbonate burglar bars that keep your view and elevate safety.
+                        </p>
+                        <ul className="mt-6 space-y-2 text-sm text-muted-foreground">
+                            <li className="flex items-start gap-2"><CheckCircle2 className="mt-0.5 size-4 text-emerald-500" />A-grade 6 mm UV-protected polycarbonate (engineered for impact and clarity)</li>
+                            <li className="flex items-start gap-2"><CheckCircle2 className="mt-0.5 size-4 text-emerald-500" />Crystal	clear sightlines with clean, low-profile installs</li>
+                            <li className="flex items-start gap-2"><CheckCircle2 className="mt-0.5 size-4 text-emerald-500" />~7 day lead time, 10-year UV guarantee, 1-year workmanship</li>
+                        </ul>
+                        <div className="mt-6 flex flex-wrap items-center gap-3">
+                            <Button asChild size="lg">
+                                <Link href={quote.url()}>Get a Free Quote</Link>
+                            </Button>
+                            <Link href={trellis.gates.url()} className="text-sm text-primary underline-offset-4 hover:underline">
+                                Looking for trellis gates?
+                            </Link>
+                        </div>
+                    </div>
+                    <Card className="h-full self-start">
+                        <CardHeader>
+                            <CardTitle className="flex items-center gap-2"><Shield className="size-5" /> Why homeowners switch</CardTitle>
+                            <CardDescription>Security without the prison-bar look.</CardDescription>
+                        </CardHeader>
+                        <CardContent className="space-y-3 text-sm text-muted-foreground">
+                            <div>Crystal	clear sightlines, natural light, and strong impact resistance.</div>
+                            <div>Rust-free, low-maintenance materials that last.</div>
+                            <div>Local team, friendly service, professional fitment.</div>
+                        </CardContent>
+                    </Card>
+                </div>
+            </section>
+
             {/* Trust bar: logos + testimonials */}
             <section className="mx-auto w-full max-w-7xl px-4 pb-16">
-                {/* Logo strip */}
-                <div className="mb-10 grid grid-cols-2 items-center gap-4 sm:grid-cols-3 md:grid-cols-5">
-                    {[1, 2, 3, 4, 5].map((i) => (
-                        <div
-                            key={i}
-                            className="flex h-12 items-center justify-center rounded-md border border-sidebar-border/60 bg-background/60 text-xs text-muted-foreground"
-                        >
-                            Logo {i}
-                        </div>
-                    ))}
-                </div>
-
-                {/* Testimonials */}
+                                {/* Testimonials */}
                 <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
                     {[
                         {
@@ -99,6 +126,7 @@ export default function HomePage() {
                     ))}
                 </div>
             </section>
+
 
             {/* Quick links */}
             <section className="mx-auto w-full max-w-7xl px-4 pb-16">

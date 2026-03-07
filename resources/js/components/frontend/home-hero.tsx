@@ -136,41 +136,75 @@ export default function HomeHero() {
                 </div>
 
                 {/* Highlight card */}
-                <div
-                    className={
-                        'relative max-w-xl justify-self-center rounded-2xl border border-white/15 bg-white/90 p-5 text-foreground dark:bg-background/90 ' +
-                        ' shadow-xl' +
-                        ' backdrop-blur' +
-                        'transition-all duration-200 ease-out' +
-                        (mounted && !reduceMotion
-                            ? 'translate-y-0 opacity-100 delay-150'
-                            : 'translate-y-3 opacity-0')
-                    }
-                >
+                <div className="relative isolate">
                     <div
-                        className="pointer-events-none absolute inset-0 rounded-2xl ring-1 ring-white/10 ring-inset"
-                        aria-hidden
-                    />
-                    <div className="text-md mb-3 font-semibold text-foreground/80">
-                        Why homeowners choose Crystal Bars
+                        className={
+                            'relative max-w-xl justify-self-center rounded-2xl border border-white/15 bg-white p-5 text-foreground dark:bg-background ' +
+                            ' shadow-xl' +
+                            ' backdrop-blur' +
+                            'transition-all duration-200 ease-out' +
+                            (mounted && !reduceMotion
+                                ? 'translate-y-0 opacity-100 delay-150'
+                                : 'translate-y-3 opacity-0')
+                        }
+                    >
+                        <div
+                            className="pointer-events-none absolute inset-0 rounded-2xl ring-1 ring-white/10 ring-inset"
+                            aria-hidden
+                        />
+                        <div className="text-md mb-3 font-semibold text-foreground/80">
+                            Why homeowners choose Crystal Bars
+                        </div>
+                        <ul className="space-y-2.5 text-sm text-foreground/90">
+                            <li className="flex items-start gap-3">
+                                <span className="mt-1 size-1.5 shrink-0 rounded-full bg-emerald-400" />
+                                Engineered polycarbonate that resists impact,
+                                yellowing, and UV damage.
+                            </li>
+                            <li className="flex items-start gap-3">
+                                <span className="mt-1 size-1.5 shrink-0 rounded-full bg-emerald-400" />
+                                Clean, near-invisible installation that
+                                preserves natural light and views.
+                            </li>
+                            <li className="flex items-start gap-3">
+                                <span className="mt-1 size-1.5 shrink-0 rounded-full bg-emerald-400" />
+                                Local team, on-site measurement, and quick,
+                                professional fitment.
+                            </li>
+                        </ul>
                     </div>
-                    <ul className="space-y-2.5 text-sm text-foreground/90">
-                        <li className="flex items-start gap-3">
-                            <span className="mt-1 size-1.5 shrink-0 rounded-full bg-emerald-400" />
-                            Engineered polycarbonate that resists impact,
-                            yellowing, and UV damage.
-                        </li>
-                        <li className="flex items-start gap-3">
-                            <span className="mt-1 size-1.5 shrink-0 rounded-full bg-emerald-400" />
-                            Clean, near-invisible installation that preserves
-                            natural light and views.
-                        </li>
-                        <li className="flex items-start gap-3">
-                            <span className="mt-1 size-1.5 shrink-0 rounded-full bg-emerald-400" />
-                            Local team, on-site measurement, and quick,
-                            professional fitment.
-                        </li>
-                    </ul>
+                    <div
+                        className={
+                            'absolute inset-0 -z-10 w-full max-w-xl origin-bottom-left translate-y-1 scale-95 rotate-1 justify-self-center rounded-2xl border' +
+                            ' border-white/15' +
+                            ' bg-white/80' +
+                            ' p-5' +
+                            ' text-foreground' +
+                            ' dark:bg-background/90' +
+                            ' shadow-xl' +
+                            ' backdrop-blur' +
+                            'transition-all duration-200 ease-out' +
+                            (mounted && !reduceMotion
+                                ? 'translate-y-0 opacity-100 delay-150'
+                                : 'translate-y-3 opacity-0')
+                        }
+                    ></div>
+                    <div
+                        className={
+                            'absolute inset-0 -z-12 w-full max-w-xl origin-bottom-left translate-y-2 scale-90 rotate-2 justify-self-center rounded-2xl' +
+                            ' border border-white/15' +
+                            ' bg-white/70' +
+                            ' p-5' +
+                            ' text-foreground' +
+                            ' dark:bg-background/90' +
+                            ' shadow-xl' +
+                            ' backdrop-blur' +
+                            'transition-all duration-200 ease-out' +
+                            (mounted && !reduceMotion
+                                ? 'translate-y-0 opacity-100 delay-150'
+                                : 'translate-y-3 opacity-0')
+                        }
+                    ></div>
                 </div>
             </div>
             <BarsComponent />
