@@ -1,9 +1,11 @@
 import { Link } from '@inertiajs/react';
 import { Phone, MessageCircle, Mail } from 'lucide-react';
-import BG from '@/../images/examples/10489802_1474159762822672_9219813355605679489_n.jpg'
+import BG from '@/../images/examples/10489802_1474159762822672_9219813355605679489_n.jpg';
 import HendryImage from '@/../images/hendry.jpg';
 import { Button } from '@/components/ui/button';
 import { quote } from '@/routes';
+import Wrapper from '@/components/frontend/wrapper';
+
 export default function OwnerCTA() {
     return (
         <section className="relative overflow-hidden bg-linear-to-br from-primary/20 via-primary/10 to-background py-16">
@@ -15,11 +17,11 @@ export default function OwnerCTA() {
                     aria-hidden={true}
                     src={BG}
                     alt=""
-                    className="absolute inset-0 h-full w-full object-cover "
+                    className="absolute inset-0 h-full w-full object-cover"
                 />
             </div>
 
-            <div className="relative mx-auto w-full max-w-7xl px-4">
+            <Wrapper>
                 <div className="grid grid-cols-1 items-center gap-12 rounded-3xl border bg-background/90 p-8 shadow-2xl backdrop-blur md:grid-cols-2">
                     {/* Big square profile image */}
                     <div className="flex flex-col items-center text-center md:items-start md:text-left">
@@ -93,7 +95,7 @@ export default function OwnerCTA() {
                         </Button>
                     </div>
                 </div>
-            </div>
+            </Wrapper>
         </section>
     );
 }
