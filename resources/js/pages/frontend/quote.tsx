@@ -3,6 +3,7 @@ import confetti from "canvas-confetti"
 import { Trash2 } from 'lucide-react';
 import React, { Fragment } from 'react';
 import { toast } from 'sonner';
+import Wrapper from '@/components/frontend/wrapper';
 import InputError from '@/components/input-error';
 import { Button } from '@/components/ui/button';
 import {
@@ -81,12 +82,12 @@ export default function QuotePage() {
     return (
         <FrontendLayout>
             <Head title="Quote" />
-            <section className="mx-auto w-full max-w-7xl px-4 py-12">
+            <Wrapper className=" py-12">
                 <h1 className="text-2xl font-semibold">Get a Quote</h1>
                 <p className="mt-2 text-neutral-600 dark:text-neutral-300">
                     Request a custom quote for your project.
                 </p>
-                <Card className={`my-12 max-w-2xl`}>
+                <Card className={`my-12 `}>
                     <CardHeader>
                         <CardTitle>Get Free Quote</CardTitle>
                         <CardDescription>
@@ -353,7 +354,7 @@ export default function QuotePage() {
                         </form>
                     </CardContent>
                 </Card>
-            </section>
+            </Wrapper>
         </FrontendLayout>
     );
 }

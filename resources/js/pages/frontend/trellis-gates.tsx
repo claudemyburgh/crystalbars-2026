@@ -8,6 +8,7 @@ import { quote } from '@/routes';
 import gateImage from '../../../images/gate.jpg';
 import barsImage from '../../../images/bars.png';
 import gateLong from '../../../images/examples/WhatsApp Image 2022-11-19 at 17.39.35.jpg';
+import Wrapper from '@/components/frontend/wrapper';
 
 
 export default function TrellisGatesPage() {
@@ -16,7 +17,7 @@ export default function TrellisGatesPage() {
         <FrontendLayout>
             <Head title="Trellis Gates" />
 
-            <div className="mx-auto grid w-full max-w-7xl grid-cols-1 gap-4 px-4 py-8 md:grid-cols-2 lg:grid-cols-3">
+            <Wrapper className=" grid grid-cols-1 gap-4 py-8 md:grid-cols-2 lg:grid-cols-3">
                 {/* Bento Box 1: Hero Section - Introduction + Image */}
                 <div className="col-span-full flex flex-col justify-between rounded-xl border border-sidebar-border/60 bg-gradient-to-br from-primary/10 to-accent/10 p-8 lg:col-span-2">
                     <h1 className="text-3xl font-semibold tracking-tight text-foreground sm:text-4xl">
@@ -171,7 +172,7 @@ export default function TrellisGatesPage() {
                         </Button>
                     </div>
                 </div>
-            </div>
+            </Wrapper>
         </FrontendLayout>
     );
 }

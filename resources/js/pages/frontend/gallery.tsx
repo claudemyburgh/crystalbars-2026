@@ -1,4 +1,5 @@
 import { Head } from '@inertiajs/react';
+import Wrapper from '@/components/frontend/wrapper';
 import FrontendLayout from '@/layouts/frontend-layout';
 
 
@@ -7,7 +8,7 @@ export default function GalleryPage() {
     return (
         <FrontendLayout>
             <Head title="Gallery" />
-            <section className="mx-auto w-full max-w-7xl px-4 py-12">
+            <Wrapper className="py-12">
                 <h1 className="text-2xl font-semibold">Gallery</h1>
                 <p className="mt-2 text-neutral-600 dark:text-neutral-300">
                     Browse our latest projects and installations.
@@ -20,7 +21,7 @@ export default function GalleryPage() {
                         />
                     ))}
                 </div>
-            </section>
+            </Wrapper>
         </FrontendLayout>
     );
 }

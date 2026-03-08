@@ -8,7 +8,7 @@ import {
 import { Button } from '@/components/ui/button';
 import FrontendLayout from '@/layouts/frontend-layout';
 import { quote } from '@/routes';
-
+import Wrapper from '@/components/frontend/wrapper';
 
 type Faq = { id: number; question: string; answer: string };
 
@@ -23,7 +23,7 @@ export default function FaqsPage({ faqs }: { faqs: Faq[] }) {
                     <div className="absolute inset-0 bg-linear-to-br from-background/80 via-background/60 to-background/70" />
                 </div>
 
-                <div className="mx-auto w-full max-w-7xl px-4 py-20">
+                <Wrapper className="py-20">
                     <div className="grid items-center gap-8 md:grid-cols-2">
                         <div>
                             <h1 className="text-3xl font-semibold tracking-tight sm:text-4xl">
@@ -47,10 +47,10 @@ export default function FaqsPage({ faqs }: { faqs: Faq[] }) {
                             </div>
                         </div>
                     </div>
-                </div>
+                </Wrapper>
             </section>
 
-            <section className="mx-auto w-full max-w-3xl px-4 py-12">
+            <Wrapper className="py-12">
                 <div className="mt-6">
                     <Accordion type="single" className="space-y-3">
                         {faqs.map((item) => (
@@ -69,7 +69,7 @@ export default function FaqsPage({ faqs }: { faqs: Faq[] }) {
                         ))}
                     </Accordion>
                 </div>
-            </section>
+            </Wrapper>
         </FrontendLayout>
     );
 }

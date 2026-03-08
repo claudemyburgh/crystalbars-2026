@@ -22,7 +22,7 @@ export default function OwnerCTA() {
                 />
             </div>
 
-            <Wrapper>
+            <Wrapper className={`max-w-4xl`}>
                 <div className="grid grid-cols-1 items-center gap-12 rounded-3xl border bg-background/90 p-8 shadow-2xl backdrop-blur md:grid-cols-2">
                     {/* Big square profile image */}
                     <div className="flex flex-col items-center text-center md:items-start md:text-left">

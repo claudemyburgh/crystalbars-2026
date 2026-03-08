@@ -35,6 +35,7 @@ import FrontendLayout from '@/layouts/frontend-layout';
 import { cn } from '@/lib/utils';
 import { gallery, faqs, quote } from '@/routes';
 import trellis from '@/routes/trellis';
+import Wrapper from '@/components/frontend/wrapper';
 
 type Faq = {
     id: number;
@@ -131,7 +132,7 @@ export default function HomePage({ faqs: dbFaqs }: HomePageProps) {
 
             {/* Trust Stats Bar - Gradient Divider */}
             <div className="relative overflow-hidden bg-primary/10 py-10">
-                <div className="relative z-10 mx-auto flex max-w-7xl flex-wrap items-center justify-center gap-8 px-4">
+                <Wrapper className="relative z-10 flex flex-wrap items-center justify-center gap-8 ">
                     <div className="flex items-center gap-3 rounded-full bg-background/80 px-4 py-2 shadow-sm backdrop-blur">
                         <Award className="size-5 text-primary" />
                         <span className="text-sm font-semibold">
@@ -156,7 +157,7 @@ export default function HomePage({ faqs: dbFaqs }: HomePageProps) {
                             ~2 Day Lead Time
                         </span>
                     </div>
-                </div>
+                </Wrapper>
                 <svg
                     className={`absolute inset-0 fill-primary`}
                     xmlns="http://www.w3.org/2000/svg"
@@ -171,7 +172,7 @@ export default function HomePage({ faqs: dbFaqs }: HomePageProps) {
 
             {/* Bento Grid - Main Feature Section */}
             <section className="py-16">
-                <div className="mx-auto w-full max-w-7xl px-4">
+                <Wrapper>
                     <div className="grid grid-cols-1 gap-6 lg:grid-cols-12">
                         {/* Main Content */}
                         <div className="rounded-3xl bg-linear-to-br from-primary/5 to-primary/10 p-8 lg:col-span-7">
@@ -266,7 +267,7 @@ export default function HomePage({ faqs: dbFaqs }: HomePageProps) {
                             </ul>
                         </div>
                     </div>
-                </div>
+                </Wrapper>
             </section>
 
             {/* Divider with gradient */}
@@ -274,7 +275,7 @@ export default function HomePage({ faqs: dbFaqs }: HomePageProps) {
 
             {/* Bento Grid - Benefits */}
             <section className="py-16">
-                <div className="mx-auto w-full max-w-7xl px-4">
+                <Wrapper>
                     <div className="mb-10 text-center">
                         <h2 className="text-3xl font-black tracking-tight md:text-4xl">
                             Why Choose{' '}
@@ -324,7 +325,7 @@ export default function HomePage({ faqs: dbFaqs }: HomePageProps) {
                             </div>
                         ))}
                     </div>
-                </div>
+                </Wrapper>
             </section>
 
             {/* Divider with gradient */}
@@ -332,7 +333,7 @@ export default function HomePage({ faqs: dbFaqs }: HomePageProps) {
 
             {/* Bento Grid - Product Comparison */}
             <section className="bg-linear-to-b from-muted/20 to-muted/40 py-16">
-                <div className="mx-auto w-full max-w-7xl px-4">
+                <Wrapper>
                     <div className="mb-10 text-center">
                         <h2 className="text-3xl font-black tracking-tight md:text-4xl">
                             <Highlighter
@@ -449,7 +450,7 @@ export default function HomePage({ faqs: dbFaqs }: HomePageProps) {
                             </div>
                         </div>
                     </div>
-                </div>
+                </Wrapper>
             </section>
 
             {/* Divider with gradient */}
@@ -457,7 +458,7 @@ export default function HomePage({ faqs: dbFaqs }: HomePageProps) {
 
             {/* Bento Grid - Local Service */}
             <section className="py-16">
-                <div className="mx-auto w-full max-w-7xl px-4">
+                <Wrapper>
                     <div className="grid grid-cols-1 gap-6 lg:grid-cols-2">
                         <div className="relative overflow-hidden rounded-2xl">
                             <img
@@ -527,7 +528,7 @@ export default function HomePage({ faqs: dbFaqs }: HomePageProps) {
                             </div>
                         </div>
                     </div>
-                </div>
+                </Wrapper>
             </section>
 
             {/* Divider with gradient */}
@@ -535,14 +536,14 @@ export default function HomePage({ faqs: dbFaqs }: HomePageProps) {
 
             {/* Bento Grid - Testimonials */}
             <section className="bg-linear-to-b from-muted/20 to-muted/40 py-16">
-                <div className="mx-auto w-full max-w-7xl px-4">
+                <Wrapper>
                     <div className="mb-10 text-center">
                         <h2 className="text-3xl font-black tracking-tight md:text-4xl">
                             What Our Clients Say
                         </h2>
                     </div>
                     <MarqueeReviews />
-                </div>
+                </Wrapper>
             </section>
 
             {/* Divider with gradient */}
@@ -550,7 +551,7 @@ export default function HomePage({ faqs: dbFaqs }: HomePageProps) {
 
             {/* Bento Grid - Gallery Preview */}
             <section className="py-16">
-                <div className="mx-auto w-full max-w-7xl px-4">
+                <Wrapper>
                     <div className="mb-10 text-center">
                         <h2 className="text-3xl font-black tracking-tight md:text-4xl">
                             Our Work
@@ -569,7 +570,7 @@ export default function HomePage({ faqs: dbFaqs }: HomePageProps) {
                             </Link>
                         </Button>
                     </div>
-                </div>
+                </Wrapper>
             </section>
 
             {/* Divider with gradient */}
@@ -577,7 +578,7 @@ export default function HomePage({ faqs: dbFaqs }: HomePageProps) {
 
             {/* FAQ Section */}
             <section className="bg-linear-to-b from-muted/20 to-muted/40 py-16">
-                <div className="mx-auto w-full max-w-7xl px-4">
+                <Wrapper>
                     <div className="mb-10 text-center">
                         <h2 className="text-3xl font-black tracking-tight md:text-4xl">
                             Frequently Asked Questions
@@ -617,7 +618,7 @@ export default function HomePage({ faqs: dbFaqs }: HomePageProps) {
                             View all FAQs <ArrowRight className="size-4" />
                         </Link>
                     </div>
-                </div>
+                </Wrapper>
             </section>
 
             {/* Final CTA - Gradient Background */}
@@ -672,7 +673,7 @@ export default function HomePage({ faqs: dbFaqs }: HomePageProps) {
 
             {/* Quick links - Footer */}
             <section className="bg-background py-12">
-                <div className="mx-auto w-full max-w-7xl px-4">
+                <Wrapper>
                     <div className="grid grid-cols-1 gap-6 sm:grid-cols-3">
                         <Link href={trellis.gates.url()} className="group">
                             <div className="rounded-xl border p-6 transition-all group-hover:border-primary/50 group-hover:bg-primary/5">
@@ -702,7 +703,7 @@ export default function HomePage({ faqs: dbFaqs }: HomePageProps) {
                             </div>
                         </Link>
                     </div>
-                </div>
+                </Wrapper>
             </section>
         </FrontendLayout>
     );

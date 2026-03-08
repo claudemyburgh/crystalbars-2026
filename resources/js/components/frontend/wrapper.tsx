@@ -10,10 +10,11 @@ export default function Wrapper({
 }: ComponentProps<any>) {
     return (
         <div
-            className={cn('mx-auto w-full max-w-7xl px-4', className)}
+            className={cn('mx-auto w-full max-w-6xl px-4', className)}
             {...props}
         >
             {children}
+
         </div>
     );
 }

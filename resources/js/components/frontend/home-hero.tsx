@@ -7,6 +7,7 @@ import { Highlighter } from '@/components/ui/highlighter';
 import { PlaceholderPattern } from '@/components/ui/placeholder-pattern';
 import { RainbowButton } from '@/components/ui/rainbow-button';
 import { quote } from '@/routes';
+import Wrapper from '@/components/frontend/wrapper';
 
 export default function HomeHero() {
     // Mount + reduced motion handling for subtle entrance animations and media preferences
@@ -72,7 +73,7 @@ export default function HomeHero() {
             />
 
             {/* Content */}
-            <div className="relative z-50 mx-auto grid w-full max-w-7xl grid-cols-1 items-center gap-8 px-4 py-28 md:grid-cols-3 md:py-40">
+            <Wrapper className="relative z-50 grid  grid-cols-1 items-center gap-8 py-28 md:grid-cols-3 md:py-40">
                 {/* Lead copy */}
                 <div
                     className={`max-w-4xl transition-all duration-200 ease-out md:col-span-2 ${
@@ -205,7 +206,7 @@ export default function HomeHero() {
                         }
                     ></div>
                 </div>
-            </div>
+            </Wrapper>
             <BarsComponent />
         </section>
     );

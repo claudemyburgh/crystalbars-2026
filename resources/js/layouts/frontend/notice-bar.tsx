@@ -1,6 +1,7 @@
 import { Mail, MessageCircle, Phone, FileText } from 'lucide-react';
 import { Link } from '@inertiajs/react';
 import { quote } from '@/routes';
+import Wrapper from '@/components/frontend/wrapper';
 
 export default function FrontendNoticeBar() {
     const telDisplay = '079 491 2812';
@@ -16,7 +17,7 @@ export default function FrontendNoticeBar() {
 
     return (
         <div className="sticky top-0 z-20 w-full border-b border-sidebar-border/70 bg-primary h-10 flex items-center text-white ">
-            <div className="mx-auto flex w-full items-center justify-center px-4 md:max-w-7xl">
+            <Wrapper className="flex  items-center justify-center ">
                 <div className="inline-flex items-center gap-3 px-3 py-1.5 text-xs text-white font-semibold">
                     <a href={telHref} className="group inline-flex items-center gap-1.5 hover:opacity-90 transition-opacity" aria-label={`Call ${telDisplay}`}>
                         <Phone className="size-5 opacity-80 group-hover:opacity-100" />
@@ -34,7 +35,7 @@ export default function FrontendNoticeBar() {
                     </a>
 
                 </div>
-            </div>
+            </Wrapper>
         </div>
     );
 }

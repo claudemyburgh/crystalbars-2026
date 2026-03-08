@@ -4,13 +4,14 @@ import { Menu } from 'lucide-react';
 import AppLogo from '@/components/frontend/app-logo';
 import { Button } from '@/components/ui/button';
 import { NavigationMenu, NavigationMenuItem, NavigationMenuList, navigationMenuTriggerStyle } from '@/components/ui/navigation-menu';
-import { RainbowButton } from '@/components/ui/rainbow-button';
 import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from '@/components/ui/sheet';
 import ThemeToggle from '@/components/ui/theme-toggle';
+import { RainbowButton } from '@/components/ui/rainbow-button';
 
 import { useFrontendRoutes  } from '@/hooks/use-frontend-routes';
 import type {FrontendNavLinks} from '@/hooks/use-frontend-routes';
 import { cn } from '@/lib/utils';
+import Wrapper from '@/components/frontend/wrapper';
 
 type Props = {
     links?: FrontendNavLinks;
@@ -54,7 +55,7 @@ export default function FrontendTopNav({ links }: Props) {
 
     return (
         <div className="sticky top-10 z-50 w-full bg-background/80 drop-shadow-xl drop-shadow-sidebar-border backdrop-blur supports-backdrop-filter:bg-background/60 dark:drop-shadow-black">
-            <div className="mx-auto flex h-16 items-center justify-between px-4 md:max-w-7xl">
+            <Wrapper className="flex h-16 items-center justify-between">
                 <Link
                     href={hrefs.home}
                     prefetch
@@ -97,22 +98,43 @@ export default function FrontendTopNav({ links }: Props) {
                                 <ul className="flex flex-col space-y-4">
                                     {items.map((item) => (
                                         <li key={item.title}>
-                                            <Link
-                                                href={item.href}
-                                                prefetch={'hover'}
-                                                aria-current={
-                                                    isActive(item.href)
-                                                        ? 'page'
-                                                        : undefined
-                                                }
-                                                className={cn(
-                                                    'inline-flex h-9 w-full items-center rounded-md px-3 py-2 text-sm font-medium hover:bg-primary hover:text-primary-foreground',
-                                                    isActive(item.href) &&
-                                                        'bg-primary/10 text-foreground',
-                                                )}
-                                            >
-                                                {item.title}
-                                            </Link>
+                                            {item.title === 'Free Quote' ? (
+                                                <RainbowButton asChild size="default">
+                                                    <Link
+                                                        href={item.href}
+                                                        prefetch={'hover'}
+                                                        aria-current={
+                                                            isActive(item.href)
+                                                                ? 'page'
+                                                                : undefined
+                                                        }
+                                                        className={cn(
+                                                            'inline-flex h-9 w-full items-center rounded-md px-3 py-2 text-sm font-medium justify-center', // Added justify-center for alignment
+                                                            isActive(item.href) &&
+                                                                'bg-primary/10 text-foreground',
+                                                        )}
+                                                    >
+                                                        {item.title}
+                                                    </Link>
+                                                </RainbowButton>
+                                            ) : (
+                                                <Link
+                                                    href={item.href}
+                                                    prefetch={'hover'}
+                                                    aria-current={
+                                                        isActive(item.href)
+                                                            ? 'page'
+                                                            : undefined
+                                                    }
+                                                    className={cn(
+                                                        'inline-flex h-9 w-full items-center rounded-md px-3 py-2 text-sm font-medium hover:bg-primary hover:text-primary-foreground',
+                                                        isActive(item.href) &&
+                                                            'bg-primary/10 text-foreground',
+                                                    )}
+                                                >
+                                                    {item.title}
+                                                </Link>
+                                            )}
                                         </li>
                                     ))}
                                 </ul>
@@ -130,18 +152,35 @@ export default function FrontendTopNav({ links }: Props) {
                                     key={index}
                                     className="relative flex h-full flex-1 items-center whitespace-nowrap"
                                 >
-                                    <Link
-                                        href={item.href}
-                                        prefetch={'hover'}
-                                        className={cn(
-                                            navigationMenuTriggerStyle(),
-                                            'relative h-9 w-full justify-center rounded-md px-3 after:absolute after:bottom-0 after:left-1/4 after:h-0.5 after:w-1/2 after:bg-primary after:opacity-0 after:content-[""]',
-                                            isActive(item.href) &&
-                                                'bg-primary/10 text-foreground after:opacity-100',
-                                        )}
-                                    >
-                                        {item.title}
-                                    </Link>
+                                    {item.title === 'Free Quote' ? (
+                                        <RainbowButton asChild size="default">
+                                            <Link
+                                                href={item.href}
+                                                prefetch={'hover'}
+                                                className={cn(
+                                                    navigationMenuTriggerStyle(),
+                                                    'relative h-9 w-full justify-center rounded-md px-3 after:absolute after:bottom-0 after:left-1/4 after:h-0.5 after:w-1/2 after:bg-primary after:opacity-0 after:content-[""]',
+                                                    isActive(item.href) &&
+                                                        'bg-primary/10 text-foreground after:opacity-100',
+                                                )}
+                                            >
+                                                {item.title}
+                                            </Link>
+                                        </RainbowButton>
+                                    ) : (
+                                        <Link
+                                            href={item.href}
+                                            prefetch={'hover'}
+                                            className={cn(
+                                                navigationMenuTriggerStyle(),
+                                                'relative h-9 w-full justify-center rounded-md px-3 after:absolute after:bottom-0 after:left-1/4 after:h-0.5 after:w-1/2 after:bg-primary after:opacity-0 after:content-[""]',
+                                                isActive(item.href) &&
+                                                    'bg-primary/10 text-foreground after:opacity-100',
+                                            )}
+                                        >
+                                            {item.title}
+                                        </Link>
+                                    )}
                                 </NavigationMenuItem>
                             ))}
                         </NavigationMenuList>
@@ -150,7 +189,7 @@ export default function FrontendTopNav({ links }: Props) {
                         <ThemeToggle />
                     </div>
                 </div>
-            </div>
+            </Wrapper>
         </div>
     );
 }
