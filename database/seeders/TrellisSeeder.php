@@ -10,14 +10,14 @@ class TrellisSeeder extends Seeder
     public function run(): void
     {
         $trellisItems = [
-            ['width' => '900mm', 'drop' => '2100mm', 'price' => 'R 3,800'],
-            ['width' => '1200mm', 'drop' => '2100mm', 'price' => 'R 4,800'],
-            ['width' => '1500mm', 'drop' => '2100mm', 'price' => 'R 5,400'],
-            ['width' => '1800mm', 'drop' => '2100mm', 'price' => 'R 5,900'],
-            ['width' => '2200mm', 'drop' => '2100mm', 'price' => 'R 6,700'],
-            ['width' => '2500mm', 'drop' => '2100mm', 'price' => 'R 7,560'],
-            ['width' => '2700mm', 'drop' => '2100mm', 'price' => 'R 8,400'],
-            ['width' => '3000mm', 'drop' => '2100mm', 'price' => 'R 9,400'],
+            ['width' => '900', 'drop' => '2100', 'price' => '3800'],
+            ['width' => '1200', 'drop' => '2100', 'price' => '4800'],
+            ['width' => '1500', 'drop' => '2100', 'price' => '5400'],
+            ['width' => '1800', 'drop' => '2100', 'price' => '5900'],
+            ['width' => '2200', 'drop' => '2100', 'price' => '6700'],
+            ['width' => '2500', 'drop' => '2100', 'price' => '7560'],
+            ['width' => '2700', 'drop' => '2100', 'price' => '8400'],
+            ['width' => '3000', 'drop' => '2100', 'price' => '9400'],
         ];
 
         foreach ($trellisItems as $item) {
