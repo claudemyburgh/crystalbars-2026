@@ -1,5 +1,6 @@
 import { Head, Link } from '@inertiajs/react';
 import FrontendLayout from '@/layouts/frontend-layout';
+import Wrapper from '@/components/frontend/wrapper';
 import {
     Shield,
     Lock,
@@ -95,7 +96,7 @@ export default function TrellisGatesPage({
             <div className="min-h-screen bg-background">
                 <main>
                     {/* Hero Bento Grid */}
-                    <section className="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8 lg:py-12">
+                    <Wrapper as="section" className="py-8 lg:py-12">
                         <div className="grid auto-rows-[200px] grid-cols-1 gap-4 md:auto-rows-[220px] md:grid-cols-2 lg:grid-cols-4">
                             {/* Main Hero - Large */}
                             <div className="group relative col-span-1 row-span-2 overflow-hidden rounded-3xl bg-secondary md:col-span-2 lg:col-span-2">
@@ -225,14 +226,14 @@ export default function TrellisGatesPage({
                                 </div>
                             </div>
                         </div>
-                    </section>
+                    </Wrapper>
 
                     {/* Features Section */}
                     <section
                         id="features"
                         className="bg-background py-16 lg:py-24"
                     >
-                        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+                        <Wrapper>
                             <div className="mb-12 text-center lg:mb-16">
                                 <Badge variant="secondary" className="mb-4">
                                     Features
@@ -266,7 +267,7 @@ export default function TrellisGatesPage({
                                     </Card>
                                 ))}
                             </div>
-                        </div>
+                        </Wrapper>
                     </section>
 
                     {/* Gallery Bento Grid */}
@@ -274,7 +275,7 @@ export default function TrellisGatesPage({
                         id="gallery"
                         className="bg-muted/30 py-16 lg:py-24"
                     >
-                        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+                        <Wrapper>
                             <div className="mb-12 text-center lg:mb-16">
                                 <Badge variant="secondary" className="mb-4">
                                     Gallery
@@ -340,7 +341,7 @@ export default function TrellisGatesPage({
                                     />
                                 </div>
                             </div>
-                        </div>
+                        </Wrapper>
                     </section>
 
                     {/* Pricing Section */}
@@ -348,7 +349,7 @@ export default function TrellisGatesPage({
                         id="pricing"
                         className="bg-background py-16 lg:py-24"
                     >
-                        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+                        <Wrapper>
                             <div className="grid items-start gap-12 lg:grid-cols-2 lg:gap-16">
                                 <div>
                                     <Badge variant="secondary" className="mb-4">
@@ -457,12 +458,12 @@ export default function TrellisGatesPage({
                                     </CardContent>
                                 </Card>
                             </div>
-                        </div>
+                        </Wrapper>
                     </section>
 
                     {/* CTA Section */}
                     <section className="bg-primary py-16 text-primary-foreground lg:py-24">
-                        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+                        <Wrapper>
                             <div className="grid items-center gap-12 lg:grid-cols-2">
                                 <div>
                                     <Badge className="mb-4 border-white/20 bg-white/10 text-white">
@@ -508,7 +509,7 @@ export default function TrellisGatesPage({
                                     <div className="absolute inset-[0] bg-[linear-gradient(to_right,rgba(0,0,0,0.5),transparent)]" />
                                 </div>
                             </div>
-                        </div>
+                        </Wrapper>
                     </section>
                 </main>
             </div>

@@ -3,11 +3,12 @@ import Gallery2 from '@/../images/examples/WhatsApp Image 2022-11-19 at 17.38.31
 import Gallery3 from '@/../images/examples/WhatsApp Image 2022-11-19 at 17.38.32.jpg';
 import Gallery1 from '@/../images/stand.jpg';
 import { Card } from '@/components/ui/card';
+import Wrapper from '@/components/frontend/wrapper';
 
 const Gallery = () => {
     return (
         <>
-            <div className="mx-auto w-full max-w-7xl px-4">
+            <Wrapper>
                 <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
                     {/* LEFT – Large card */}
                     <Card className="group relative overflow-hidden rounded-2xl border-none p-0 after:absolute after:h-full after:w-full after:bg-linear-to-b after:from-transparent after:from-60% after:to-gray-950">
@@ -84,9 +85,10 @@ const Gallery = () => {
                         </div>
                     </div>
                 </div>
-            </div>
+            </Wrapper>
         </>
     );
 };
 
 export default Gallery;
+

@@ -3,6 +3,7 @@ import { cn } from '@/lib/utils';
 import type { InertiaLinkProps } from '@inertiajs/react';
 import { useFrontendRoutes  } from '@/hooks/use-frontend-routes';
 import type {FrontendNavLinks} from '@/hooks/use-frontend-routes';
+import Wrapper from '@/components/frontend/wrapper';
 
 export type FrontendFooterLinks = FrontendNavLinks;
 
@@ -19,7 +20,7 @@ export default function FrontendFooterNav({ links }: { links?: FrontendFooterLin
 
     return (
         <footer className="border-t border-sidebar-border/70 bg-background/80">
-            <div className="mx-auto w-full max-w-7xl px-4 py-8">
+            <Wrapper className="py-8">
                 <nav aria-label="Footer Navigation">
                     <ul className="flex flex-wrap items-center gap-4 text-sm text-neutral-600 dark:text-neutral-300">
                         {items.map((item) => (
@@ -32,7 +33,7 @@ export default function FrontendFooterNav({ links }: { links?: FrontendFooterLin
                     </ul>
                 </nav>
                 <p className="mt-4 text-xs text-neutral-500">© {new Date().getFullYear()} All rights reserved.</p>
-            </div>
+            </Wrapper>
         </footer>
     );
 }
