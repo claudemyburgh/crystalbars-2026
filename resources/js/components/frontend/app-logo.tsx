@@ -1,6 +1,6 @@
+import logoDark from '@/../images/logo-dark.webp';
+import logoLight from '@/../images/logo-light.webp';
 import { useAppearance } from '@/hooks/use-appearance';
-import logoDark from '../../../images/logo-dark.png';
-import logoLight from '../../../images/logo-light.png';
 
 export default function AppLogo() {
     const { resolvedAppearance } = useAppearance();

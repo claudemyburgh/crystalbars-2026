@@ -16,6 +16,7 @@ class Quote extends Model
      * @var list<string>
      */
     protected $fillable = [
+        'client_id',
         'name',
         'email',
         'phone',
@@ -23,6 +24,11 @@ class Quote extends Model
         'read_at',
         'replied_at',
     ];
+
+    public function client()
+    {
+        return $this->belongsTo(Client::class);
+    }
 
     /**
      * Get the attributes that should be cast.

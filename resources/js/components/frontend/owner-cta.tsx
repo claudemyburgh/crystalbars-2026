@@ -1,11 +1,11 @@
 import { Link } from '@inertiajs/react';
 import { Phone, MessageCircle, Mail } from 'lucide-react';
 import BG from '@/../images/examples/10489802_1474159762822672_9219813355605679489_n.jpg';
-import HendryImage from '@/../images/hendry.jpg';
-import { Button } from '@/components/ui/button';
-import { quote } from '@/routes';
+import HendryImage from '@/../images/hendry.webp';
 import Wrapper from '@/components/frontend/wrapper';
-import { ShineBorder } from '../ui/shine-border';
+import { Button } from '@/components/ui/button';
+import { ShineBorder } from '@/components/ui/shine-border';
+import { quote } from '@/routes';
 
 export default function OwnerCTA() {
     return (

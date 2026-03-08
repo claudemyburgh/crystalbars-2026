@@ -37,7 +37,15 @@ test('a quote request can be submitted', function () {
                $mail->data == $data;
     });
 
+    $this->assertDatabaseHas('clients', [
+        'name' => 'John Doe',
+        'email' => 'john@example.com',
+        'phone' => '+27821234567',
+    ]);
+
+    $client = \App\Models\Client::where('email', 'john@example.com')->first();
     $this->assertDatabaseHas('quotes', [
+        'client_id' => $client->id,
         'name' => 'John Doe',
         'email' => 'john@example.com',
         'phone' => '+27821234567',
@@ -48,6 +56,24 @@ test('a quote request can be submitted', function () {
         'text' => 'This is a test message.',
         'windows' => [],
     ]);
+    expect($quote->client_id)->toBe($client->id);
+
+    // Test that submitting again with same email doesn't create a new client
+    $data2 = [
+        'name' => 'John Updated',
+        'email' => 'john@example.com',
+        'phone' => '+27821111111',
+        'message' => 'Second message',
+    ];
+
+    $this->post(route('quote.store'), $data2);
+
+    expect(\App\Models\Client::count())->toBe(1);
+    $client->refresh();
+    expect($client->name)->toBe('John Updated');
+    expect($client->phone)->toBe('+27821111111');
+    expect(\App\Models\Quote::count())->toBe(2);
+    expect(\App\Models\Quote::latest()->first()->client_id)->toBe($client->id);
 });
 
 test('a quote request fails validation with invalid data', function () {

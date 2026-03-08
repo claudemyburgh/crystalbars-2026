@@ -1,5 +1,5 @@
-import { Link } from '@inertiajs/react';
-import { BookOpen, FolderGit2, LayoutGrid, Square } from 'lucide-react';
+import { Link, usePage } from '@inertiajs/react';
+import { BookOpen,  Image, LayoutGrid, Square, Users } from 'lucide-react';
 import AppLogo from '@/components/app-logo';
 import { NavFooter } from '@/components/nav-footer';
 import { NavMain } from '@/components/nav-main';
@@ -13,28 +13,12 @@ import {
     SidebarMenuButton,
     SidebarMenuItem,
 } from '@/components/ui/sidebar';
-import { index } from '@/routes/trellis';
 import { dashboard } from '@/routes';
+import { index as clientIndex } from '@/routes/admin/clients';
+import { index as galleryIndex } from '@/routes/admin/gallery-groups';
 import { index as quoteIndex } from '@/routes/admin/quotes';
+import { index } from '@/routes/trellis';
 import type { NavItem } from '@/types';
-
-const mainNavItems: NavItem[] = [
-    {
-        title: 'Dashboard',
-        href: dashboard(),
-        icon: LayoutGrid,
-    },
-    {
-        title: 'Trellis',
-        href: index(),
-        icon: Square,
-    },
-    {
-        title: 'Quotes',
-        href: quoteIndex(),
-        icon: BookOpen,
-    },
-];
 
 const footerNavItems: NavItem[] = [
     // {
@@ -50,6 +34,38 @@ const footerNavItems: NavItem[] = [
 ];
 
 export function AppSidebar() {
+    const { unreadQuotesCount } = usePage<{ unreadQuotesCount: number }>().props;
+
+    const mainNavItems: NavItem[] = [
+        {
+            title: 'Dashboard',
+            href: dashboard(),
+            icon: LayoutGrid,
+        },
+        {
+            title: 'Quotes',
+            href: quoteIndex(),
+            icon: BookOpen,
+            badge: unreadQuotesCount || null,
+        },
+        {
+            title: 'Trellis',
+            href: index(),
+            icon: Square,
+        },
+
+        {
+            title: 'Clients',
+            href: clientIndex(),
+            icon: Users,
+        },
+        {
+            title: 'Galleries',
+            href: galleryIndex(),
+            icon: Image,
+        },
+    ];
+
     return (
         <Sidebar collapsible="icon" variant="inset">
             <SidebarHeader>

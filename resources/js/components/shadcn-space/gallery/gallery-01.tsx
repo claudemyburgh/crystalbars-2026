@@ -1,7 +1,7 @@
 import Gallery4 from '@/../images/examples/75279256_2426432367595402_7017356600314691584_n.jpg';
 import Gallery2 from '@/../images/examples/WhatsApp Image 2022-11-19 at 17.38.31.jpg';
 import Gallery3 from '@/../images/examples/WhatsApp Image 2022-11-19 at 17.38.32.jpg';
-import Gallery1 from '@/../images/stand.jpg';
+import Gallery1 from '@/../images/stand.webp';
 import { Card } from '@/components/ui/card';
 import Wrapper from '@/components/frontend/wrapper';
 

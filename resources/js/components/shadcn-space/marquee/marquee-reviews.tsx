@@ -19,52 +19,59 @@ type Review = {
 
 const reviews: Review[] = [
     {
-        name: 'Ken Masters',
-        username: '@kmasters',
-        body: 'Exceptional build quality and very professional team. Installation was quick and neat.',
-        profile: 'https://images.shadcnspace.com/assets/profiles/rough.webp',
+        name: 'Michelle van der Berg',
+        username: 'Tableview, Cape Town',
+        body: 'Absolutely love my new crystal bars! They look so modern and you can barely tell they\'re there. Installed in one morning, very neat workmanship.',
+        profile: 'https://api.dicebear.com/9.x/initials/svg?seed=MvdB&backgroundColor=0ea5e9',
         rating: 5,
     },
     {
-        name: 'Kira Athrun',
-        username: '@kathrun',
-        body: 'Great service from start to finish. The trellis gates glide smoothly and feel solid.',
-        profile: 'https://images.shadcnspace.com/assets/profiles/albert.webp',
+        name: 'Pieter Botha',
+        username: 'Bellville, Cape Town',
+        body: 'The trellis gate is exactly what I was looking for — solid aluminium, smooth slam lock, and free installation. Highly recommend Crystal Bars.',
+        profile: 'https://api.dicebear.com/9.x/initials/svg?seed=PB&backgroundColor=6366f1',
         rating: 5,
     },
     {
-        name: 'Lirael Nassun',
-        username: '@lnassun',
-        body: 'Highly recommend Crystal Bars — reliable, friendly, and quality workmanship.',
-        profile: 'https://images.shadcnspace.com/assets/profiles/linda.webp',
+        name: 'Samantha Naidoo',
+        username: 'Durbanville, Cape Town',
+        body: 'We were worried bars would block the garden view. These polycarbonate bars are crystal clear — you forget they\'re even there. 10/10.',
+        profile: 'https://api.dicebear.com/9.x/initials/svg?seed=SN&backgroundColor=f59e0b',
         rating: 5,
     },
     {
-        name: 'Jessica',
-        username: '@jessica',
-        body: 'Switching to this platform streamlined our entire workflow. Setup was effortless, performance improved instantly.',
-        profile: 'https://images.shadcnspace.com/assets/profiles/jessica.webp',
+        name: 'Deon Fourie',
+        username: 'Somerset West',
+        body: 'Quick quote, quick install. The team was professional and the bars look amazing on my newly renovated house. No more ugly steel bars!',
+        profile: 'https://api.dicebear.com/9.x/initials/svg?seed=DF&backgroundColor=10b981',
         rating: 5,
     },
     {
-        name: 'Jenny',
-        username: '@jenny',
-        body: 'We evaluated multiple solutions, but this stood out immediately. Fast, scalable, and thoughtfully designed.',
-        profile: 'https://images.shadcnspace.com/assets/profiles/jenny.webp',
+        name: 'Yusra Adams',
+        username: 'Paarl',
+        body: 'Very happy with the service and product. The bars won\'t rust which is great for the coastal climate. Fair pricing and great communication throughout.',
+        profile: 'https://api.dicebear.com/9.x/initials/svg?seed=YA&backgroundColor=ec4899',
         rating: 5,
     },
     {
-        name: 'Kira Athrun',
-        username: '@kathrun2',
-        body: 'What surprised us most was how quickly our team adapted. Minimal learning curve and powerful features.',
-        profile: 'https://images.shadcnspace.com/assets/profiles/albert.webp',
+        name: 'Gavin Steyn',
+        username: 'Milnerton, Cape Town',
+        body: 'I replaced my old steel burglar bars with these and the difference is night and day. Natural light floods in and the UV guarantee gives real peace of mind.',
+        profile: 'https://api.dicebear.com/9.x/initials/svg?seed=GS&backgroundColor=8b5cf6',
         rating: 5,
     },
     {
-        name: 'Ken Masters',
-        username: '@kmasters2',
-        body: 'Our productivity has nearly doubled since onboarding. Automation features removed repetitive tasks.',
-        profile: 'https://images.shadcnspace.com/assets/profiles/rough.webp',
+        name: 'Anette du Plessis',
+        username: 'Strand',
+        body: 'Couldn\'t be happier. The installer was on time, tidy, and explained everything. The bars are strong — my husband tested them himself!',
+        profile: 'https://api.dicebear.com/9.x/initials/svg?seed=AdP&backgroundColor=f97316',
+        rating: 5,
+    },
+    {
+        name: 'Tariq Hendricks',
+        username: 'Stellenbosch',
+        body: 'Went with the trellis gate for the front door. Very heavy-duty and the slam lock is reassuring. Quoted and installed within a week.',
+        profile: 'https://api.dicebear.com/9.x/initials/svg?seed=TH&backgroundColor=14b8a6',
         rating: 5,
     },
 ];
@@ -184,6 +191,16 @@ export default function TestimonialMarqueeDemo() {
                         />
                     ))}
                 </Marquee>
+                <Marquee pauseOnHover className="[--duration:20s]">
+                    {firstRow.map((review) => (
+                        <ReviewCard
+                            key={review.username}
+                            {...review}
+                            onClick={() => setSelectedReview(review)}
+                        />
+                    ))}
+                </Marquee>
+
                 <div className="pointer-events-none absolute inset-y-0 left-0 w-1/4 bg-gradient-to-r from-background"></div>
                 <div className="pointer-events-none absolute inset-y-0 right-0 w-1/4 bg-gradient-to-l from-background"></div>
             </div>

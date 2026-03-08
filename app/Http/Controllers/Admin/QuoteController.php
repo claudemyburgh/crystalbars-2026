@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Mail\AdminQuoteReply;
 use App\Models\Quote;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
@@ -13,12 +14,36 @@ use Inertia\Response;
 
 class QuoteController extends Controller
 {
-    public function index(): Response
+    public function index(Request $request): Response
     {
-        $quotes = Quote::latest()->get();
+        $search = $request->input('search');
+        $sort = $request->input('sort', 'created_at');
+        $direction = $request->input('direction', 'desc');
+        $status = $request->input('status');
+
+        $quotes = Quote::query()
+            ->when($search, function (Builder $query, $value) {
+                $query->where(function ($q) use ($value) {
+                    $q->where('name', 'like', "%{$value}%")
+                        ->orWhere('email', 'like', "%{$value}%")
+                        ->orWhere('phone', 'like', "%{$value}%");
+                });
+            })
+            ->when($status === 'unread', fn (Builder $q) => $q->whereNull('read_at'))
+            ->when($status === 'read', fn (Builder $q) => $q->whereNotNull('read_at')->whereNull('replied_at'))
+            ->when($status === 'replied', fn (Builder $q) => $q->whereNotNull('replied_at'))
+            ->orderBy($sort, $direction)
+            ->paginate(15)
+            ->withQueryString();
 
         return Inertia::render('admin/quotes/index', [
             'quotes' => $quotes,
+            'filters' => [
+                'search' => $request->query('search', ''),
+                'sort' => $request->query('sort', 'created_at'),
+                'direction' => $request->query('direction', 'desc'),
+                'status' => $request->query('status', ''),
+            ],
         ]);
     }
 

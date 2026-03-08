@@ -3,11 +3,11 @@ import {  Shield, Eye, Timer } from 'lucide-react';
 import { useEffect, useState } from 'react';
 
 import BarsComponent from '@/components/frontend/bars-component';
+import Wrapper from '@/components/frontend/wrapper';
 import { Highlighter } from '@/components/ui/highlighter';
 import { PlaceholderPattern } from '@/components/ui/placeholder-pattern';
 import { RainbowButton } from '@/components/ui/rainbow-button';
 import { quote } from '@/routes';
-import Wrapper from '@/components/frontend/wrapper';
 
 export default function HomeHero() {
     // Mount + reduced motion handling for subtle entrance animations and media preferences
@@ -29,7 +29,7 @@ export default function HomeHero() {
 
     // Media
     const videoSrc = new URL('../../../videos/file.mp4', import.meta.url).href;
-    const posterSrc = new URL('../../../images/file.jpg', import.meta.url).href;
+    const posterSrc = new URL('../../../images/file.webp', import.meta.url).href;
 
     return (
         <section

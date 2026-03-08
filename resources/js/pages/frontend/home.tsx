@@ -1,8 +1,5 @@
 import { Head, Link } from '@inertiajs/react';
 import {
-    Shield,
-    Image as ImageIcon,
-    HelpCircle,
     CheckCircle2,
     Sun,
     Hammer,
@@ -15,11 +12,14 @@ import {
     ArrowRight,
     Eye,
     X,
+    Shield,
 } from 'lucide-react';
-import BarsImage from '@/../images/bars.png';
+import BarsImage from '@/../images/bars.webp';
 import WhatsAppImage from '@/../images/examples/WhatsApp Image 2022-11-19 at 17.39.40.jpg';
+import { BenefitCard } from '@/components/frontend/benefit-card';
 import HomeHero from '@/components/frontend/home-hero';
-import OwnerCTA from '@/components/frontend/owner-cta';
+import { QuickLinks } from '@/components/frontend/quick-links';
+import Wrapper from '@/components/frontend/wrapper';
 import Gallery01 from '@/components/shadcn-space/gallery/gallery-01';
 import MarqueeReviews from '@/components/shadcn-space/marquee/marquee-reviews';
 import {
@@ -29,13 +29,9 @@ import {
     AccordionContent,
 } from '@/components/ui/accordion';
 import { Button } from '@/components/ui/button';
-import { DotPattern } from '@/components/ui/dot-pattern';
 import { Highlighter } from '@/components/ui/highlighter';
 import FrontendLayout from '@/layouts/frontend-layout';
-import { cn } from '@/lib/utils';
-import { gallery, faqs, quote } from '@/routes';
-import trellis from '@/routes/trellis';
-import Wrapper from '@/components/frontend/wrapper';
+import { faqs, gallery, quote } from '@/routes';
 
 type Faq = {
     id: number;
@@ -136,13 +132,13 @@ export default function HomePage({ faqs: dbFaqs }: HomePageProps) {
                     <div className="flex items-center gap-3 rounded-full bg-background/80 px-4 py-2 shadow-sm backdrop-blur">
                         <Award className="size-5 text-primary" />
                         <span className="text-sm font-semibold">
-                            10+ Years Experience
+                            15+ Years Experience
                         </span>
                     </div>
                     <div className="flex items-center gap-3 rounded-full bg-background/80 px-4 py-2 shadow-sm backdrop-blur">
                         <Users className="size-5 text-primary" />
                         <span className="text-sm font-semibold">
-                            500+ Installations
+                            1000+ Installations
                         </span>
                     </div>
                     <div className="flex items-center gap-3 rounded-full bg-background/80 px-4 py-2 shadow-sm backdrop-blur">
@@ -296,33 +292,12 @@ export default function HomePage({ faqs: dbFaqs }: HomePageProps) {
                     </div>
                     <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
                         {benefits.map((benefit, idx) => (
-                            <div
+                            <BenefitCard
                                 key={idx}
-                                className={`group relative overflow-hidden rounded-2xl border bg-background p-6 shadow-sm transition-all hover:scale-[1.02] hover:shadow-lg`}
-                            >
-                                <DotPattern
-                                    width={20}
-                                    height={20}
-                                    cx={1}
-                                    cy={1}
-                                    cr={1}
-                                    className={cn(
-                                        "[mask-image:linear-gradient(to_bottom_right,white,transparent,transparent)]"
-                                    )}
-                                />
-                                <div className="absolute inset-0 rounded-2xl bg-linear-to-br from-primary/5 to-transparent opacity-0 transition-opacity group-hover:opacity-100" />
-                                <div className="relative">
-                                    <div className="mb-3 inline-flex size-12 items-center justify-center rounded-xl bg-primary/10">
-                                        <benefit.icon className="size-6 text-primary" />
-                                    </div>
-                                    <h3 className="text-lg font-bold">
-                                        {benefit.title}
-                                    </h3>
-                                    <p className="mt-2 text-sm text-muted-foreground">
-                                        {benefit.description}
-                                    </p>
-                                </div>
-                            </div>
+                                icon={benefit.icon}
+                                title={benefit.title}
+                                description={benefit.description}
+                            />
                         ))}
                     </div>
                 </Wrapper>
@@ -564,7 +539,7 @@ export default function HomePage({ faqs: dbFaqs }: HomePageProps) {
                     <Gallery01 />
                     <div className="mt-8 text-center">
                         <Button asChild variant="outline" size="lg">
-                            <Link href={gallery.url()}>
+                            <Link prefetch={`hover`} href={gallery.url()}>
                                 View Full Gallery{' '}
                                 <ArrowRight className="ml-2 size-4" />
                             </Link>
@@ -669,42 +644,8 @@ export default function HomePage({ faqs: dbFaqs }: HomePageProps) {
                 </div>
             </section>
 
-
-
             {/* Quick links - Footer */}
-            <section className="bg-background py-12">
-                <Wrapper>
-                    <div className="grid grid-cols-1 gap-6 sm:grid-cols-3">
-                        <Link href={trellis.gates.url()} className="group">
-                            <div className="rounded-xl border p-6 transition-all group-hover:border-primary/50 group-hover:bg-primary/5">
-                                <Shield className="mb-3 size-8 text-primary" />
-                                <h3 className="font-bold">Trellis Gates</h3>
-                                <p className="mt-1 text-sm text-muted-foreground">
-                                    Strong, smooth, and built to last.
-                                </p>
-                            </div>
-                        </Link>
-                        <Link href={gallery.url()} className="group">
-                            <div className="rounded-xl border p-6 transition-all group-hover:border-primary/50 group-hover:bg-primary/5">
-                                <ImageIcon className="mb-3 size-8 text-primary" />
-                                <h3 className="font-bold">Gallery</h3>
-                                <p className="mt-1 text-sm text-muted-foreground">
-                                    See recent installations.
-                                </p>
-                            </div>
-                        </Link>
-                        <Link href={faqs.url()} className="group">
-                            <div className="rounded-xl border p-6 transition-all group-hover:border-primary/50 group-hover:bg-primary/5">
-                                <HelpCircle className="mb-3 size-8 text-primary" />
-                                <h3 className="font-bold">FAQs</h3>
-                                <p className="mt-1 text-sm text-muted-foreground">
-                                    Common questions answered.
-                                </p>
-                            </div>
-                        </Link>
-                    </div>
-                </Wrapper>
-            </section>
+            <QuickLinks />
         </FrontendLayout>
     );
 }

@@ -1,6 +1,7 @@
 import { Head, Link } from '@inertiajs/react';
 import FrontendLayout from '@/layouts/frontend-layout';
 import Wrapper from '@/components/frontend/wrapper';
+import { BenefitCard } from '@/components/frontend/benefit-card';
 import {
     Shield,
     Lock,
@@ -12,6 +13,7 @@ import {
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
+import { Tooltip, TooltipContent, TooltipTrigger } from '@/components/ui/tooltip';
 import {
     Table,
     TableBody,
@@ -152,40 +154,37 @@ export default function TrellisGatesPage({
                                         Four Premium Finishes
                                     </p>
                                 </div>
-                                <div className="flex gap-3">
+                                <div className="flex justify-evenly gap-3">
                                     {colors.map((color) => (
-                                        <div
-                                            key={color.name}
-                                            className="group/color relative"
-                                        >
-                                            <div
-                                                className={`h-10 w-10 rounded-full ${color.color} cursor-pointer shadow-sm transition-transform group-hover/color:scale-110`}
-                                            />
-                                            <span className="absolute -bottom-6 left-1/2 -translate-x-1/2 text-xs whitespace-nowrap text-muted-foreground opacity-0 transition-opacity group-hover/color:opacity-100">
-                                                {color.name}
-                                            </span>
-                                        </div>
+                                        <Tooltip key={color.name}>
+                                            <TooltipTrigger asChild>
+                                                <div
+                                                    className={`h-10 w-10 cursor-pointer rounded-full border border-border shadow-sm transition-transform hover:scale-110 ${color.color}`}
+                                                />
+                                            </TooltipTrigger>
+                                            <TooltipContent>{color.name}</TooltipContent>
+                                        </Tooltip>
                                     ))}
                                 </div>
                             </div>
 
                             {/* Stats Card */}
-                            <div className="col-span-1 row-span-1 flex flex-col justify-between rounded-3xl border border-border bg-primary p-6 text-primary-foreground">
+                            <div className="col-span-1 row-span-1 flex flex-col justify-between rounded-3xl border border-border bg-primary p-6 text-white/80">
                                 <div>
-                                    <p className="mb-1 text-sm text-primary-foreground/80">
+                                    <p className="mb-1 text-sm text-white">
                                         Starting From
                                     </p>
                                     <p className="text-3xl font-bold">
                                         R{' '}
                                         {trellises.length > 0
                                             ? new Intl.NumberFormat(
-                                                  'en-ZA',
-                                              ).format(trellises[0].price)
+                                                'en-ZA',
+                                            ).format(trellises[0].price)
                                             : '3,800'}
                                     </p>
                                 </div>
-                                <div className="flex items-center gap-2 text-sm text-primary-foreground/80">
-                                    <CheckCircle2 className="h-4 w-4 text-emerald-400" />
+                                <div className="flex items-center gap-2 text-sm text-white/80">
+                                    <CheckCircle2 className="h-4 w-4 text-secondary" />
                                     Installation included
                                 </div>
                             </div>
@@ -249,22 +248,12 @@ export default function TrellisGatesPage({
 
                             <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
                                 {features.map((feature) => (
-                                    <Card
+                                    <BenefitCard
                                         key={feature.title}
-                                        className="py-0 transition-all duration-300 hover:shadow-lg"
-                                    >
-                                        <CardContent className="p-6">
-                                            <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-2xl bg-muted">
-                                                <feature.icon className="h-6 w-6 text-primary" />
-                                            </div>
-                                            <h3 className="mb-2 text-lg font-semibold text-foreground">
-                                                {feature.title}
-                                            </h3>
-                                            <p className="text-sm leading-relaxed text-muted-foreground">
-                                                {feature.description}
-                                            </p>
-                                        </CardContent>
-                                    </Card>
+                                        icon={feature.icon}
+                                        title={feature.title}
+                                        description={feature.description}
+                                    />
                                 ))}
                             </div>
                         </Wrapper>

@@ -1,9 +1,8 @@
-import { Link, usePage } from '@inertiajs/react';
-import { cn } from '@/lib/utils';
+import { Link } from '@inertiajs/react';
 import type { InertiaLinkProps } from '@inertiajs/react';
+import Wrapper from '@/components/frontend/wrapper';
 import { useFrontendRoutes  } from '@/hooks/use-frontend-routes';
 import type {FrontendNavLinks} from '@/hooks/use-frontend-routes';
-import Wrapper from '@/components/frontend/wrapper';
 
 export type FrontendFooterLinks = FrontendNavLinks;
 
@@ -25,14 +24,27 @@ export default function FrontendFooterNav({ links }: { links?: FrontendFooterLin
                     <ul className="flex flex-wrap items-center gap-4 text-sm text-neutral-600 dark:text-neutral-300">
                         {items.map((item) => (
                             <li key={item.title}>
-                                <Link href={item.href} className="hover:underline">
+                                <Link prefetch={'hover'} href={item.href} className="hover:underline">
                                     {item.title}
                                 </Link>
                             </li>
                         ))}
                     </ul>
                 </nav>
-                <p className="mt-4 text-xs text-neutral-500">© {new Date().getFullYear()} All rights reserved.</p>
+                <div className="mt-4 flex flex-wrap items-center justify-between gap-2 text-xs text-neutral-500">
+                    <p>©2013–{new Date().getFullYear()} Crystal Bars. All rights reserved.</p>
+                    <p>
+                        Designed &amp; Developed by{' '}
+                        <a
+                            href="https://designbycode.co.za"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="font-medium text-primary hover:underline"
+                        >
+                            DesignByCode
+                        </a>
+                    </p>
+                </div>
             </Wrapper>
         </footer>
     );

@@ -3,7 +3,6 @@
 namespace App\Listeners;
 
 use App\Events\QuoteSubmitted;
-use App\Models\Quote;
 
 class SaveQuoteToDatabase
 {
@@ -20,7 +19,16 @@ class SaveQuoteToDatabase
      */
     public function handle(QuoteSubmitted $event): void
     {
-        Quote::create([
+        $client = \App\Models\Client::updateOrCreate(
+            ['email' => $event->data['email']],
+            [
+                'name' => $event->data['name'],
+                'phone' => $event->data['phone'],
+            ]
+        );
+
+        \App\Models\Quote::create([
+            'client_id' => $client->id,
             'name' => $event->data['name'],
             'email' => $event->data['email'],
             'phone' => $event->data['phone'],
