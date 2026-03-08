@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\TrellisController;
 use App\Http\Controllers\Frontend\FaqsController;
 use App\Http\Controllers\Frontend\GalleryController;
 use App\Http\Controllers\Frontend\HomeController;
@@ -11,6 +12,14 @@ Route::get('/', HomeController::class)->name('home');
 
 Route::middleware(['auth', 'verified'])->group(function () {
     Route::inertia('dashboard', 'dashboard')->name('dashboard');
+
+    Route::prefix('admin/trellis')->name('trellis.')->group(function () {
+        Route::get('/', [TrellisController::class, 'index'])->name('index');
+        Route::post('/', [TrellisController::class, 'store'])->name('store');
+        Route::put('/{trellis}', [TrellisController::class, 'update'])->name('update');
+        Route::delete('/{trellis}', [TrellisController::class, 'destroy'])->name('destroy');
+        Route::post('/reorder', [TrellisController::class, 'reorder'])->name('reorder');
+    });
 });
 
 Route::get('/trellis-gates', TrellisGatesController::class)->name('trellis.gates');

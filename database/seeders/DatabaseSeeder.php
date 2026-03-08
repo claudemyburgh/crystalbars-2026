@@ -25,6 +25,7 @@ class DatabaseSeeder extends Seeder
 
         $this->call([
             FaqSeeder::class,
+            TrellisSeeder::class,
         ]);
     }
 }
