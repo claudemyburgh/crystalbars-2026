@@ -17,7 +17,7 @@ import {
     verticalListSortingStrategy,
 } from '@dnd-kit/sortable';
 import { CSS } from '@dnd-kit/utilities';
-import { Head, useForm, usePage  } from '@inertiajs/react';
+import { Head, router, useForm, usePage } from '@inertiajs/react';
 import { GripVertical, Pencil, Trash2 } from 'lucide-react';
 import { useEffect, useState } from 'react';
 import { toast } from 'sonner';
@@ -172,10 +172,6 @@ export default function TrellisIndexPage({
         price: '',
     });
 
-    const reorderForm = useForm({
-        order: [] as { id: number; order_column: number }[],
-    });
-
     const deleteForm = useForm({});
 
     if (success) {
@@ -186,38 +182,35 @@ export default function TrellisIndexPage({
         const { active, over } = event;
 
         if (over && active.id !== over.id) {
-            setItems((items) => {
-                const oldIndex = items.findIndex(
-                    (item) => item.id === active.id,
-                );
-                const newIndex = items.findIndex((item) => item.id === over.id);
-                const newItems = arrayMove(items, oldIndex, newIndex).map(
-                    (item: TrellisItem, index: number) => ({
-                        ...item,
-                        order_column: index + 1,
-                    }),
-                );
+            const oldIndex = items.findIndex((item) => item.id === active.id);
+            const newIndex = items.findIndex((item) => item.id === over.id);
+            
+            const newItems = arrayMove(items, oldIndex, newIndex).map(
+                (item: TrellisItem, index: number) => ({
+                    ...item,
+                    order_column: index + 1,
+                }),
+            );
 
-                reorderForm.setData(
-                    'order',
-                    newItems.map((item) => ({
+            setItems(newItems);
+
+            router.post(
+                '/admin/trellis/reorder',
+                {
+                    order: newItems.map((item) => ({
                         id: item.id,
                         order_column: item.order_column,
                     })),
-                );
-
-                reorderForm.post('/admin/trellis/reorder', {
+                },
+                {
                     preserveScroll: true,
                     only: ['trellisItems'], // Request only this prop from the server
                     onSuccess: (page: any) => {
                         setItems(page.props.trellisItems);
                         toast.success('Trellis items reordered successfully.'); // Show toast on success
                     },
-                });
-
-                // Do NOT setItems here, let useEffect react to updated trellisItems prop
-                return newItems;
-            });
+                }
+            );
         }
     }
 
@@ -353,34 +346,36 @@ export default function TrellisIndexPage({
                     collisionDetection={closestCenter}
                     onDragEnd={handleDragEnd}
                 >
-                    <Table>
-                        <TableHeader>
-                            <TableRow>
-                                <TableHead className="w-10"></TableHead>
-                                <TableHead>Width</TableHead>
-                                <TableHead>Drop</TableHead>
-                                <TableHead>Price</TableHead>
-                                <TableHead className="text-right">
-                                    Actions
-                                </TableHead>
-                            </TableRow>
-                        </TableHeader>
-                        <TableBody>
-                            <SortableContext
-                                items={items.map((i) => i.id)}
-                                strategy={verticalListSortingStrategy}
-                            >
-                                {items.map((item) => (
-                                    <SortableRow
-                                        key={item.id}
-                                        item={item}
-                                        onEdit={handleEdit}
-                                        onDelete={handleDelete}
-                                    />
-                                ))}
-                            </SortableContext>
-                        </TableBody>
-                    </Table>
+                    <div className="rounded-md border">
+                        <Table>
+                            <TableHeader>
+                                <TableRow>
+                                    <TableHead className="w-10"></TableHead>
+                                    <TableHead>Width</TableHead>
+                                    <TableHead>Drop</TableHead>
+                                    <TableHead>Price</TableHead>
+                                    <TableHead className="text-right">
+                                        Actions
+                                    </TableHead>
+                                </TableRow>
+                            </TableHeader>
+                            <TableBody>
+                                <SortableContext
+                                    items={items.map((i) => i.id)}
+                                    strategy={verticalListSortingStrategy}
+                                >
+                                    {items.map((item) => (
+                                        <SortableRow
+                                            key={item.id}
+                                            item={item}
+                                            onEdit={handleEdit}
+                                            onDelete={handleDelete}
+                                        />
+                                    ))}
+                                </SortableContext>
+                            </TableBody>
+                        </Table>
+                    </div>
                 </DndContext>
 
                 <Dialog
