@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\QuoteController as AdminQuoteController;
 use App\Http\Controllers\Admin\TrellisController;
 use App\Http\Controllers\Frontend\FaqsController;
 use App\Http\Controllers\Frontend\GalleryController;
@@ -12,6 +13,11 @@ Route::get('/', HomeController::class)->name('home');
 
 Route::middleware(['auth', 'verified'])->group(function () {
     Route::inertia('dashboard', 'dashboard')->name('dashboard');
+    Route::prefix('admin/quotes')->name('admin.quotes.')->group(function () {
+        Route::get('/', [AdminQuoteController::class, 'index'])->name('index');
+        Route::get('/{quote}', [AdminQuoteController::class, 'show'])->name('show');
+        Route::post('/{quote}/reply', [AdminQuoteController::class, 'reply'])->name('reply');
+    });
 
     Route::prefix('admin/trellis')->name('trellis.')->group(function () {
         Route::get('/', [TrellisController::class, 'index'])->name('index');

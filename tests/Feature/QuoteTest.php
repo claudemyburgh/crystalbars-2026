@@ -1,5 +1,6 @@
 <?php
 
+use App\Mail\QuoteReceivedConfirmation;
 use App\Mail\QuoteRequestSent;
 use Illuminate\Foundation\Testing\WithoutMiddleware;
 use Illuminate\Support\Facades\Mail;
@@ -30,6 +31,23 @@ test('a quote request can be submitted', function () {
         return $mail->hasTo(config('mail.from.address')) &&
                $mail->data == $data;
     });
+
+    Mail::assertSent(QuoteReceivedConfirmation::class, function (QuoteReceivedConfirmation $mail) use ($data) {
+        return $mail->hasTo($data['email']) &&
+               $mail->data == $data;
+    });
+
+    $this->assertDatabaseHas('quotes', [
+        'name' => 'John Doe',
+        'email' => 'john@example.com',
+        'phone' => '+27821234567',
+    ]);
+
+    $quote = \App\Models\Quote::first();
+    expect($quote->message)->toBe([
+        'text' => 'This is a test message.',
+        'windows' => [],
+    ]);
 });
 
 test('a quote request fails validation with invalid data', function () {

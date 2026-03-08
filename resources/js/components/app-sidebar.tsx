@@ -15,6 +15,7 @@ import {
 } from '@/components/ui/sidebar';
 import { index } from '@/routes/trellis';
 import { dashboard } from '@/routes';
+import { index as quoteIndex } from '@/routes/admin/quotes';
 import type { NavItem } from '@/types';
 
 const mainNavItems: NavItem[] = [
@@ -27,6 +28,11 @@ const mainNavItems: NavItem[] = [
         title: 'Trellis',
         href: index(),
         icon: Square,
+    },
+    {
+        title: 'Quotes',
+        href: quoteIndex(),
+        icon: BookOpen,
     },
 ];
 
