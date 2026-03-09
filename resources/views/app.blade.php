@@ -70,7 +70,7 @@
         @vite(['resources/js/app.tsx', "resources/js/pages/{$page['component']}.tsx"])
         @inertiaHead
     </head>
-    <body class="font-sans antialiased selection:bg-primary/75 selection:text-white">
+    <body class="font-sans antialiased selection:bg-primary/75 selection:text-white overflow-x-hidden">
     <!-- Google Tag Manager (noscript) -->
     <noscript>
         <iframe src="https://www.googletagmanager.com/ns.html?id={{ config('google.tagmanager.code') }}"
