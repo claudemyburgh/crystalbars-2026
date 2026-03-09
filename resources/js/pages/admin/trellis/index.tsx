@@ -8,7 +8,6 @@ import {
 
 } from '@dnd-kit/core';
 import type { DragEndEvent } from '@dnd-kit/core';
-import type { Page, PageProps as InertiaPageProps } from '@inertiajs/core';
 import {
     arrayMove,
     SortableContext,
@@ -17,6 +16,7 @@ import {
     verticalListSortingStrategy,
 } from '@dnd-kit/sortable';
 import { CSS } from '@dnd-kit/utilities';
+import type { Page, PageProps as InertiaPageProps } from '@inertiajs/core';
 import { Head, router, useForm, usePage } from '@inertiajs/react';
 import { GripVertical, Pencil, Trash2 } from 'lucide-react';
 import { useEffect, useState } from 'react';

@@ -1,9 +1,11 @@
 import { Head, router } from '@inertiajs/react';
-import { index as quoteIndex } from '@/actions/App/Http/Controllers/Admin/QuoteController';
+import { Link } from '@inertiajs/react';
 import { format } from 'date-fns';
 import { Eye, Search } from 'lucide-react';
 import { useEffect, useState } from 'react';
+import { index as quoteIndex } from '@/actions/App/Http/Controllers/Admin/QuoteController';
 import Heading from '@/components/heading';
+import { Pagination } from '@/components/pagination';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -23,8 +25,6 @@ import {
     TableRow,
 } from '@/components/ui/table';
 import AppLayout from '@/layouts/app-layout';
-import { Pagination } from '@/components/pagination';
-import { Link } from '@inertiajs/react';
 import { show } from '@/routes/admin/quotes';
 import type { BreadcrumbItem } from '@/types';
 

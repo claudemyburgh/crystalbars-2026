@@ -1,10 +1,10 @@
 import type { PropsWithChildren } from 'react';
-import { FrontendNavLinks } from '@/hooks/use-frontend-routes';
-import FrontendTopNav from '@/layouts/frontend/top-nav';
+import OwnerCTA from '@/components/frontend/owner-cta';
+import { Toaster } from '@/components/ui/sonner';
+import type { FrontendNavLinks } from '@/hooks/use-frontend-routes';
 import FrontendFooterNav from '@/layouts/frontend/footer-nav';
 import FrontendNoticeBar from '@/layouts/frontend/notice-bar';
-import { Toaster } from '@/components/ui/sonner';
-import OwnerCTA from '@/components/frontend/owner-cta';
+import FrontendTopNav from '@/layouts/frontend/top-nav';
 
 export type FrontendLayoutProps = PropsWithChildren<{
     links?: FrontendNavLinks;

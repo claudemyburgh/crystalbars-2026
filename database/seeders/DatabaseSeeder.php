@@ -13,18 +13,14 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // User::factory(10)->create();
 
-        User::query()->firstOrCreate(
-            ['email' => 'test@example.com'],
-            [
-                'name' => 'Test User',
-                'password' => bcrypt('password'),
-            ],
-        );
+        foreach (config('users') as $user) {
+            User::create($user);
+        }
 
         $this->call([
             FaqSeeder::class,
+            GallerySeeder::class,
             TrellisSeeder::class,
         ]);
     }

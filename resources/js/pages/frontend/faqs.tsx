@@ -1,4 +1,5 @@
 import { Head, Link } from '@inertiajs/react';
+import Wrapper from '@/components/frontend/wrapper';
 import {
     Accordion,
     AccordionContent,
@@ -8,7 +9,6 @@ import {
 import { Button } from '@/components/ui/button';
 import FrontendLayout from '@/layouts/frontend-layout';
 import { quote } from '@/routes';
-import Wrapper from '@/components/frontend/wrapper';
 
 type Faq = { id: number; question: string; answer: string };
 

@@ -2,6 +2,7 @@ import { Head, useForm } from '@inertiajs/react';
 import { format } from 'date-fns';
 import { Mail, Phone, User, Send } from 'lucide-react';
 import Heading from '@/components/heading';
+import InputError from '@/components/input-error';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import {
@@ -13,7 +14,6 @@ import {
     CardTitle,
 } from '@/components/ui/card';
 import { Label } from '@/components/ui/label';
-import { Textarea } from '@/components/ui/textarea';
 import {
     Table,
     TableBody,
@@ -22,10 +22,10 @@ import {
     TableHeader,
     TableRow,
 } from '@/components/ui/table';
+import { Textarea } from '@/components/ui/textarea';
 import AppLayout from '@/layouts/app-layout';
 import { reply } from '@/routes/admin/quotes';
 import type { BreadcrumbItem } from '@/types';
-import InputError from '@/components/input-error';
 
 interface WindowData {
     type?: string;

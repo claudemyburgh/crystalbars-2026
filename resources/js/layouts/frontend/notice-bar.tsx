@@ -1,7 +1,7 @@
-import { Mail, MessageCircle, Phone, FileText } from 'lucide-react';
 import { Link } from '@inertiajs/react';
-import { quote } from '@/routes';
+import { Mail, MessageCircle, Phone, FileText } from 'lucide-react';
 import Wrapper from '@/components/frontend/wrapper';
+import { quote } from '@/routes';
 
 export default function FrontendNoticeBar() {
     const telDisplay = '079 491 2812';

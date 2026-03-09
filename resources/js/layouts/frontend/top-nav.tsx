@@ -2,16 +2,16 @@ import type { InertiaLinkProps} from '@inertiajs/react';
 import { Link, usePage } from '@inertiajs/react';
 import { Menu } from 'lucide-react';
 import AppLogo from '@/components/frontend/app-logo';
+import Wrapper from '@/components/frontend/wrapper';
 import { Button } from '@/components/ui/button';
 import { NavigationMenu, NavigationMenuItem, NavigationMenuList, navigationMenuTriggerStyle } from '@/components/ui/navigation-menu';
+import { RainbowButton } from '@/components/ui/rainbow-button';
 import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from '@/components/ui/sheet';
 import ThemeToggle from '@/components/ui/theme-toggle';
-import { RainbowButton } from '@/components/ui/rainbow-button';
 
 import { useFrontendRoutes  } from '@/hooks/use-frontend-routes';
 import type {FrontendNavLinks} from '@/hooks/use-frontend-routes';
 import { cn } from '@/lib/utils';
-import Wrapper from '@/components/frontend/wrapper';
 
 type Props = {
     links?: FrontendNavLinks;

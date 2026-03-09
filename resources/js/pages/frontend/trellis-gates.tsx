@@ -1,7 +1,4 @@
 import { Head, Link } from '@inertiajs/react';
-import FrontendLayout from '@/layouts/frontend-layout';
-import Wrapper from '@/components/frontend/wrapper';
-import { BenefitCard } from '@/components/frontend/benefit-card';
 import {
     Shield,
     Lock,
@@ -10,10 +7,11 @@ import {
     Expand,
     CheckCircle2,
 } from 'lucide-react';
+import { BenefitCard } from '@/components/frontend/benefit-card';
+import Wrapper from '@/components/frontend/wrapper';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
-import { Tooltip, TooltipContent, TooltipTrigger } from '@/components/ui/tooltip';
 import {
     Table,
     TableBody,
@@ -22,19 +20,21 @@ import {
     TableHeader,
     TableRow,
 } from '@/components/ui/table';
+import { Tooltip, TooltipContent, TooltipTrigger } from '@/components/ui/tooltip';
+import FrontendLayout from '@/layouts/frontend-layout';
 import { quote } from '@/routes';
 
-import heroImage from '../../../images/examples/WhatsApp Image 2022-11-19 at 17.39.35.jpg';
-import featureLock from '../../../images/examples/WhatsApp Image 2022-11-19 at 17.39.31.jpg';
-import featureExpand from '../../../images/examples/WhatsApp Image 2022-11-19 at 12.39.38.jpg';
 import gallery1 from '../../../images/examples/10489802_1474159762822672_9219813355605679489_n.jpg';
 import gallery2 from '../../../images/examples/225357565_2953614061543894_502644624338730739_n.jpg';
 import gallery3 from '../../../images/examples/37403523_2103354546569854_5795604190340317184_n.jpg';
+import ctaImage from '../../../images/examples/42492207_10217443153776554_5487642962064048128_n.jpg';
 import gallery4 from '../../../images/examples/42513372_10217443138656176_9081619819526094848_n.jpg';
 import gallery5 from '../../../images/examples/42520445_10217443150256466_6765972413587914752_n.jpg';
 import gallery6 from '../../../images/examples/55949107_2279441115627862_8651684217282887680_n.jpg';
 import gallery7 from '../../../images/examples/74238133_2426432990928673_6319285601371684864_n.jpg';
-import ctaImage from '../../../images/examples/42492207_10217443153776554_5487642962064048128_n.jpg';
+import featureExpand from '../../../images/examples/WhatsApp Image 2022-11-19 at 12.39.38.jpg';
+import featureLock from '../../../images/examples/WhatsApp Image 2022-11-19 at 17.39.31.jpg';
+import heroImage from '../../../images/examples/WhatsApp Image 2022-11-19 at 17.39.35.jpg';
 
 const colors = [
     { name: 'White', color: 'bg-white border-2 border-neutral-200' },

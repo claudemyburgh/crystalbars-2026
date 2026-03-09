@@ -1,11 +1,12 @@
+import type {
+    DragEndEvent} from '@dnd-kit/core';
 import {
     DndContext,
     closestCenter,
     KeyboardSensor,
     PointerSensor,
     useSensor,
-    useSensors,
-    DragEndEvent
+    useSensors
 } from '@dnd-kit/core';
 import {
     arrayMove,
@@ -15,11 +16,16 @@ import {
     rectSortingStrategy,
 } from '@dnd-kit/sortable';
 import { CSS } from '@dnd-kit/utilities';
-import { Head, router, useForm, usePage } from '@inertiajs/react';
-import { upload, reorder } from '@/routes/admin/gallery-groups';
-import { destroy, bulkDestroy } from '@/routes/admin/gallery-items';
-import { GripVertical, Trash2, Upload, CheckSquare, Square, AlertTriangle, Loader2 } from 'lucide-react';
-import { useEffect, useState, useCallback, useMemo } from 'react';
+import { Head, router, usePage } from '@inertiajs/react';
+import axios from 'axios';
+import {
+    GripVertical,
+    Trash2,
+    Upload,
+    AlertTriangle,
+    Loader2,
+} from 'lucide-react';
+import { useEffect, useState, useCallback } from 'react';
 import { useDropzone } from 'react-dropzone';
 import { toast } from 'sonner';
 import Heading from '@/components/heading';
@@ -34,7 +40,16 @@ import {
     DialogTitle,
 } from '@/components/ui/dialog';
 import AppLayout from '@/layouts/app-layout';
+import { upload, reorder } from '@/routes/admin/gallery-groups';
+import { destroy, bulkDestroy } from '@/routes/admin/gallery-items';
 import type { BreadcrumbItem } from '@/types';
+
+type UploadItem = {
+    file: File;
+    id: string;
+    progress: number;
+    error?: string;
+};
 
 type Media = {
     id: number;
@@ -92,33 +107,31 @@ function SortableImage({
                 isDragging ? 'opacity-50 ring-2 ring-primary' : ''
             }`}
         >
-            <img
-                src={imageUrl}
-                alt=""
-                className="h-full w-full object-cover"
-            />
+            <img src={imageUrl} alt="" className="h-full w-full object-cover" />
 
             {/* Selection Checkbox */}
-            <div className={`absolute top-2 right-2 z-10 transition-opacity ${isSelected ? 'opacity-100' : 'opacity-0 group-hover:opacity-100'}`}>
+            <div
+                className={`absolute top-2 right-2 z-10 transition-opacity ${isSelected ? 'opacity-100' : 'opacity-0 group-hover:opacity-100'}`}
+            >
                 <Checkbox
                     checked={isSelected}
                     onCheckedChange={(checked) => onSelect(item.id, !!checked)}
                     className="h-5 w-5 bg-white/80 data-[state=checked]:bg-primary"
                 />
             </div>
-            
-            <div className="absolute inset-0 bg-black/40 opacity-0 transition-opacity group-hover:opacity-100 flex items-center justify-center gap-2">
+
+            <div className="absolute inset-0 flex items-center justify-center gap-2 bg-black/40 opacity-0 transition-opacity group-hover:opacity-100">
                 <button
                     {...attributes}
                     {...listeners}
-                    className="cursor-grab p-2 rounded-full bg-white text-black hover:bg-gray-100 touch-none"
+                    className="cursor-grab touch-none rounded-full bg-white p-2 text-black hover:bg-gray-100"
                     title="Drag to reorder"
                 >
-                    < GripVertical className="h-5 w-5" />
+                    <GripVertical className="h-5 w-5" />
                 </button>
                 <button
                     onClick={() => onDelete(item.id)}
-                    className="p-2 rounded-full bg-destructive text-destructive-foreground hover:bg-destructive/90"
+                    className="rounded-full bg-destructive p-2 text-destructive-foreground hover:bg-destructive/90"
                     title="Delete image"
                 >
                     <Trash2 className="h-5 w-5" />
@@ -128,13 +141,9 @@ function SortableImage({
     );
 }
 
-export default function GalleryShowPage({
-    group,
-}: {
-    group: GalleryGroup;
-}) {
+export default function GalleryShowPage({ group }: { group: GalleryGroup }) {
     const [items, setItems] = useState(group.galleries);
-    const [uploads, setUploads] = useState<Record<string, number>>({});
+    const [uploads, setUploads] = useState<UploadItem[]>([]);
     const [selectedIds, setSelectedIds] = useState<number[]>([]);
     const [isConfirmOpen, setIsConfirmOpen] = useState(false);
     const [idsToDelete, setIdsToDelete] = useState<number[]>([]);
@@ -164,42 +173,65 @@ export default function GalleryShowPage({
         }),
     );
 
-    const onDrop = useCallback((acceptedFiles: File[]) => {
-        if (acceptedFiles.length === 0) return;
+    const onDrop = useCallback(
+        (acceptedFiles: File[]) => {
+            if (acceptedFiles.length === 0) return;
 
-        acceptedFiles.forEach((file) => {
-            const fileId = `${file.name}-${file.size}-${Date.now()}`;
-            const formData = new FormData();
-            formData.append('images[]', file);
+            const newUploads: UploadItem[] = acceptedFiles.map((file) => ({
+                file,
+                id: `${file.name}-${file.size}-${Date.now()}-${Math.random()}`,
+                progress: 0,
+            }));
 
-            router.post(upload.url(group.id), formData, {
-                preserveScroll: true,
-                onProgress: (progress) => {
-                    if (progress) {
-                        setUploads((prev) => ({
-                            ...prev,
-                            [fileId]: progress.percentage ?? 0,
-                        }));
-                    }
-                },
-                onSuccess: () => {
-                    setUploads((prev) => {
-                        const next = { ...prev };
-                        delete next[fileId];
-                        return next;
+            setUploads((prev) => [...prev, ...newUploads]);
+
+            newUploads.forEach((uploadItem) => {
+                const formData = new FormData();
+                formData.append('images[]', uploadItem.file);
+
+                axios
+                    .post(upload.url(group.id), formData, {
+                        headers: {
+                            'Content-Type': 'multipart/form-data',
+                        },
+                        onUploadProgress: (progressEvent) => {
+                            const progress = progressEvent.total
+                                ? Math.round(
+                                      (progressEvent.loaded * 100) /
+                                          progressEvent.total,
+                                  )
+                                : 0;
+                            setUploads((prev) =>
+                                prev.map((u) =>
+                                    u.id === uploadItem.id
+                                        ? { ...u, progress }
+                                        : u,
+                                ),
+                            );
+                        },
+                    })
+                    .then(() => {
+                        setUploads((prev) =>
+                            prev.filter((u) => u.id !== uploadItem.id),
+                        );
+                        router.reload({ only: ['group'] });
+                    })
+                    .catch((error) => {
+                        const errorMessage =
+                            error.response?.data?.message || 'Upload failed';
+                        setUploads((prev) =>
+                            prev.map((u) =>
+                                u.id === uploadItem.id
+                                    ? { ...u, error: errorMessage }
+                                    : u,
+                            ),
+                        );
+                        toast.error(errorMessage);
                     });
-                },
-                onError: (errors) => {
-                    Object.values(errors).forEach((error) => toast.error(error as string));
-                    setUploads((prev) => {
-                        const next = { ...prev };
-                        delete next[fileId];
-                        return next;
-                    });
-                },
             });
-        });
-    }, [group.id]);
+        },
+        [group.id],
+    );
 
     const { getRootProps, getInputProps, isDragActive } = useDropzone({
         onDrop,
@@ -228,7 +260,7 @@ export default function GalleryShowPage({
                     onSuccess: () => {
                         toast.success('Images reordered');
                     },
-                }
+                },
             );
         }
     }
@@ -255,29 +287,35 @@ export default function GalleryShowPage({
                     toast.success('Image deleted');
                     setIsConfirmOpen(false);
                     setIdsToDelete([]);
-                    setSelectedIds(prev => prev.filter(id => id !== idsToDelete[0]));
+                    setSelectedIds((prev) =>
+                        prev.filter((id) => id !== idsToDelete[0]),
+                    );
                 },
                 onFinish: () => setIsDeleting(false),
             });
         } else {
-            router.post(bulkDestroy.url(), {
-                ids: idsToDelete
-            }, {
-                preserveScroll: true,
-                onSuccess: () => {
-                    toast.success('Images deleted');
-                    setIsConfirmOpen(false);
-                    setIdsToDelete([]);
-                    setSelectedIds([]);
+            router.post(
+                bulkDestroy.url(),
+                {
+                    ids: idsToDelete,
                 },
-                onFinish: () => setIsDeleting(false),
-            });
+                {
+                    preserveScroll: true,
+                    onSuccess: () => {
+                        toast.success('Images deleted');
+                        setIsConfirmOpen(false);
+                        setIdsToDelete([]);
+                        setSelectedIds([]);
+                    },
+                    onFinish: () => setIsDeleting(false),
+                },
+            );
         }
     }
 
     const toggleSelect = useCallback((id: number, selected: boolean) => {
-        setSelectedIds(prev => 
-            selected ? [...prev, id] : prev.filter(i => i !== id)
+        setSelectedIds((prev) =>
+            selected ? [...prev, id] : prev.filter((i) => i !== id),
         );
     }, []);
 
@@ -285,7 +323,7 @@ export default function GalleryShowPage({
         if (selectedIds.length === items.length) {
             setSelectedIds([]);
         } else {
-            setSelectedIds(items.map(i => i.id));
+            setSelectedIds(items.map((i) => i.id));
         }
     };
 
@@ -317,7 +355,9 @@ export default function GalleryShowPage({
                                 size="sm"
                                 onClick={toggleSelectAll}
                             >
-                                {selectedIds.length === items.length ? 'Deselect All' : 'Select All'}
+                                {selectedIds.length === items.length
+                                    ? 'Deselect All'
+                                    : 'Select All'}
                             </Button>
                             {selectedIds.length > 0 && (
                                 <Button
@@ -333,20 +373,38 @@ export default function GalleryShowPage({
                     )}
                 </div>
 
-                {Object.entries(uploads).length > 0 && (
-                    <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
-                        {Object.entries(uploads).map(([fileId, progress]) => (
-                            <div key={fileId} className="flex flex-col gap-2 rounded-lg border bg-muted/30 p-4">
+                {uploads.length > 0 && (
+                    <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+                        {uploads.map((upload) => (
+                            <div
+                                key={upload.id}
+                                className="flex flex-col gap-2 rounded-lg border bg-muted/30 p-4"
+                            >
                                 <div className="flex items-center justify-between text-xs">
-                                    <span className="truncate font-medium">{fileId.split('-')[0]}</span>
-                                    <span className="text-muted-foreground">{progress}%</span>
+                                    <span className="truncate font-medium">
+                                        {upload.file.name}
+                                    </span>
+                                    <span className="text-muted-foreground">
+                                        {upload.error
+                                            ? 'Error'
+                                            : `${upload.progress}%`}
+                                    </span>
                                 </div>
                                 <div className="h-1.5 w-full overflow-hidden rounded-full bg-secondary">
-                                    <div 
-                                        className="h-full bg-primary transition-all duration-300" 
-                                        style={{ width: `${progress}%` }}
+                                    <div
+                                        className={`h-full transition-all duration-300 ${
+                                            upload.error
+                                                ? 'bg-destructive'
+                                                : 'bg-primary'
+                                        }`}
+                                        style={{ width: `${upload.progress}%` }}
                                     />
                                 </div>
+                                {upload.error && (
+                                    <span className="text-xs text-destructive">
+                                        {upload.error}
+                                    </span>
+                                )}
                             </div>
                         ))}
                     </div>
@@ -395,7 +453,8 @@ export default function GalleryShowPage({
                             ))}
                             {items.length === 0 && (
                                 <div className="col-span-full py-20 text-center text-muted-foreground">
-                                    No images found in this gallery. Upload some above!
+                                    No images found in this gallery. Upload some
+                                    above!
                                 </div>
                             )}
                         </div>
@@ -410,15 +469,26 @@ export default function GalleryShowPage({
                                 Confirm Deletion
                             </DialogTitle>
                             <DialogDescription>
-                                Are you sure you want to delete {idsToDelete.length === 1 ? 'this image' : `${idsToDelete.length} images`}? 
-                                This action cannot be undone.
+                                Are you sure you want to delete{' '}
+                                {idsToDelete.length === 1
+                                    ? 'this image'
+                                    : `${idsToDelete.length} images`}
+                                ? This action cannot be undone.
                             </DialogDescription>
                         </DialogHeader>
                         <DialogFooter>
-                            <Button variant="outline" onClick={() => setIsConfirmOpen(false)} disabled={isDeleting}>
+                            <Button
+                                variant="outline"
+                                onClick={() => setIsConfirmOpen(false)}
+                                disabled={isDeleting}
+                            >
                                 Cancel
                             </Button>
-                            <Button variant="destructive" onClick={confirmDelete} disabled={isDeleting}>
+                            <Button
+                                variant="destructive"
+                                onClick={confirmDelete}
+                                disabled={isDeleting}
+                            >
                                 {isDeleting ? (
                                     <>
                                         <Loader2 className="mr-2 h-4 w-4 animate-spin" />

@@ -14,7 +14,7 @@ class GalleryGroup extends Model
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasMany<\App\Models\Gallery, $this>
      */
-    public function galleries()
+    public function galleries(): \Illuminate\Database\Eloquent\Relations\HasMany
     {
         return $this->hasMany(Gallery::class)->orderBy('order_column');
     }

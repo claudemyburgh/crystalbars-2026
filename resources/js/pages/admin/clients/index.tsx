@@ -1,11 +1,12 @@
 import { Head, router } from '@inertiajs/react';
-import { index as clientIndex, exportMethod as clientExport } from '@/actions/App/Http/Controllers/Admin/ClientController';
 import { Download, Search } from 'lucide-react';
 import { useEffect, useState } from 'react';
+import { index as clientIndex, exportMethod as clientExport } from '@/actions/App/Http/Controllers/Admin/ClientController';
 import Heading from '@/components/heading';
+import { Pagination } from '@/components/pagination';
+import { Avatar, AvatarFallback } from '@/components/ui/avatar';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
-import { Avatar, AvatarFallback } from '@/components/ui/avatar';
 import {
     Select,
     SelectContent,
@@ -22,7 +23,6 @@ import {
     TableRow,
 } from '@/components/ui/table';
 import AppLayout from '@/layouts/app-layout';
-import { Pagination } from '@/components/pagination';
 import type { BreadcrumbItem } from '@/types';
 
 interface Client {

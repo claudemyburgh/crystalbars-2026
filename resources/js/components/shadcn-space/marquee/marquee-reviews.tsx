@@ -1,4 +1,6 @@
+import { Star } from 'lucide-react';
 import { useState } from 'react';
+import { Marquee } from '@/components/shadcn-space/animations/marquee';
 import { Card, CardContent } from '@/components/ui/card';
 import {
     Dialog,
@@ -6,8 +8,6 @@ import {
     DialogHeader,
     DialogTitle,
 } from '@/components/ui/dialog';
-import { Marquee } from '@/components/shadcn-space/animations/marquee';
-import { Star } from 'lucide-react';
 
 type Review = {
     name: string;
