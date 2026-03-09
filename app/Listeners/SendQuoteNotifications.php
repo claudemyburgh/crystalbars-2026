@@ -23,7 +23,7 @@ class SendQuoteNotifications implements ShouldQueue
      */
     public function handle(QuoteSubmitted $event): void
     {
-        Mail::to(config('mail.from.address'))->queue(new QuoteRequestSent($event->data));
+        Mail::to('quotes@crystalbars.co.za')->queue(new QuoteRequestSent($event->data));
         Mail::to($event->data['email'])->queue(new QuoteReceivedConfirmation($event->data));
     }
 }
