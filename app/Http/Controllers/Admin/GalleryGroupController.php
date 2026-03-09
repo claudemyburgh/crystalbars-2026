@@ -58,4 +58,20 @@ class GalleryGroupController extends Controller
 
         return redirect()->route('admin.gallery-groups.index')->with('success', 'Gallery group deleted successfully.');
     }
+
+    public function bulkDestroy(Request $request): RedirectResponse
+    {
+        $validated = $request->validate([
+            'ids' => 'required|array',
+            'ids.*' => 'exists:gallery_groups,id',
+        ]);
+
+        // Fetch and loop to ensure model events are fired if necessary
+        $groups = GalleryGroup::whereIn('id', $validated['ids'])->get();
+        foreach ($groups as $group) {
+            $group->delete();
+        }
+
+        return redirect()->back()->with('success', 'Gallery groups deleted successfully.');
+    }
 }

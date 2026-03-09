@@ -14,6 +14,7 @@ import {
     DialogTitle,
     DialogTrigger,
 } from '@/components/ui/dialog';
+import { Checkbox } from '@/components/ui/checkbox';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import {
@@ -25,7 +26,7 @@ import {
     TableRow,
 } from '@/components/ui/table';
 import AppLayout from '@/layouts/app-layout';
-import { index, store, update, destroy, show } from '@/routes/admin/gallery-groups';
+import { index, store, update, destroy, show, bulkDestroy } from '@/routes/admin/gallery-groups';
 import type { BreadcrumbItem } from '@/types';
 
 const breadcrumbs: BreadcrumbItem[] = [
@@ -59,8 +60,10 @@ export default function GalleryIndexPage({
     const [isCreateDialogOpen, setIsCreateDialogOpen] = useState(false);
     const [isEditDialogOpen, setIsEditDialogOpen] = useState(false);
     const [isDeleteDialogOpen, setIsDeleteDialogOpen] = useState(false);
+    const [isBulkDeleteDialogOpen, setIsBulkDeleteDialogOpen] = useState(false);
     const [editingGroup, setEditingGroup] = useState<GalleryGroup | null>(null);
     const [deletingGroup, setDeletingGroup] = useState<GalleryGroup | null>(null);
+    const [selectedIds, setSelectedIds] = useState<number[]>([]);
 
     const createForm = useForm({
         name: '',
@@ -112,6 +115,26 @@ export default function GalleryIndexPage({
             onSuccess: () => {
                 setIsDeleteDialogOpen(false);
                 setDeletingGroup(null);
+                setSelectedIds(prev => prev.filter(id => id !== deletingGroup.id));
+            },
+        });
+    }
+
+    const handleSelectAll = (checked: boolean) => {
+        if (checked) setSelectedIds(groups.map(g => g.id));
+        else setSelectedIds([]);
+    };
+
+    const handleSelectOne = (checked: boolean, id: number) => {
+        if (checked) setSelectedIds(prev => [...prev, id]);
+        else setSelectedIds(prev => prev.filter(i => i !== id));
+    };
+
+    function confirmBulkDelete() {
+        router.post(bulkDestroy.url(), { ids: selectedIds }, {
+            onSuccess: () => {
+                setIsBulkDeleteDialogOpen(false);
+                setSelectedIds([]);
             },
         });
     }
@@ -168,12 +191,28 @@ export default function GalleryIndexPage({
                             </form>
                         </DialogContent>
                     </Dialog>
+                    {selectedIds.length > 0 && (
+                        <div className="flex items-center gap-2 ml-4 mr-auto">
+                            <span className="text-sm text-muted-foreground">{selectedIds.length} selected</span>
+                            <Button variant="destructive" size="sm" onClick={() => setIsBulkDeleteDialogOpen(true)}>
+                                <Trash2 className="mr-2 h-4 w-4" />
+                                Delete Selected
+                            </Button>
+                        </div>
+                    )}
                 </div>
 
                 <div className="rounded-md border">
                     <Table>
                         <TableHeader>
                             <TableRow>
+                                <TableHead className="w-[40px]">
+                                    <Checkbox 
+                                        checked={groups.length > 0 && selectedIds.length === groups.length}
+                                        onCheckedChange={handleSelectAll}
+                                        aria-label="Select all"
+                                    />
+                                </TableHead>
                                 <TableHead>Name</TableHead>
                                 <TableHead>Slug</TableHead>
                                 <TableHead>Images</TableHead>
@@ -183,6 +222,13 @@ export default function GalleryIndexPage({
                         <TableBody>
                             {groups.map((group) => (
                                 <TableRow key={group.id}>
+                                    <TableCell>
+                                        <Checkbox 
+                                            checked={selectedIds.includes(group.id)}
+                                            onCheckedChange={(checked) => handleSelectOne(!!checked, group.id)}
+                                            aria-label="Select row"
+                                        />
+                                    </TableCell>
                                     <TableCell className="font-medium">{group.name}</TableCell>
                                     <TableCell className="text-muted-foreground">{group.slug}</TableCell>
                                     <TableCell>{group.galleries_count} images</TableCell>
@@ -217,7 +263,7 @@ export default function GalleryIndexPage({
                             ))}
                             {groups.length === 0 && (
                                 <TableRow>
-                                    <TableCell colSpan={4} className="h-24 text-center text-muted-foreground">
+                                    <TableCell colSpan={5} className="h-24 text-center text-muted-foreground">
                                         No gallery groups found. Create one to get started.
                                     </TableCell>
                                 </TableRow>
@@ -280,6 +326,33 @@ export default function GalleryIndexPage({
                                 onClick={confirmDelete}
                             >
                                 Delete
+                            </Button>
+                        </DialogFooter>
+                    </DialogContent>
+                </Dialog>
+
+                {/* Bulk Delete Dialog */}
+                <Dialog open={isBulkDeleteDialogOpen} onOpenChange={setIsBulkDeleteDialogOpen}>
+                    <DialogContent>
+                        <DialogHeader>
+                            <DialogTitle>Delete Gallery Groups</DialogTitle>
+                            <DialogDescription>
+                                Are you sure you want to delete {selectedIds.length} gallery group(s)?
+                                This will also delete all images within these groups.
+                            </DialogDescription>
+                        </DialogHeader>
+                        <DialogFooter>
+                            <Button
+                                variant="outline"
+                                onClick={() => setIsBulkDeleteDialogOpen(false)}
+                            >
+                                Cancel
+                            </Button>
+                            <Button
+                                variant="destructive"
+                                onClick={confirmBulkDelete}
+                            >
+                                Delete {selectedIds.length} Groups
                             </Button>
                         </DialogFooter>
                     </DialogContent>

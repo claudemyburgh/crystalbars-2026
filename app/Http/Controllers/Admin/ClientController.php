@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Client;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 use Inertia\Response;
@@ -74,5 +75,24 @@ class ClientController extends Controller
         }, 'clients-export-'.now()->format('Y-m-d').'.csv', [
             'Content-Type' => 'text/csv',
         ]);
+    }
+
+    public function destroy(Client $client): RedirectResponse
+    {
+        $client->delete();
+
+        return redirect()->back()->with('success', 'Client deleted successfully.');
+    }
+
+    public function bulkDestroy(Request $request): RedirectResponse
+    {
+        $validated = $request->validate([
+            'ids' => 'required|array',
+            'ids.*' => 'exists:clients,id',
+        ]);
+
+        Client::whereIn('id', $validated['ids'])->delete();
+
+        return redirect()->back()->with('success', 'Clients deleted successfully.');
     }
 }

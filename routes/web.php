@@ -16,11 +16,15 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::prefix('admin/clients', [\App\Http\Controllers\Admin\ClientController::class])->name('admin.clients.')->group(function () {
         Route::get('/', [\App\Http\Controllers\Admin\ClientController::class, 'index'])->name('index');
         Route::get('/export', [\App\Http\Controllers\Admin\ClientController::class, 'export'])->name('export');
+        Route::delete('/{client}', [\App\Http\Controllers\Admin\ClientController::class, 'destroy'])->name('destroy');
+        Route::post('/bulk-destroy', [\App\Http\Controllers\Admin\ClientController::class, 'bulkDestroy'])->name('bulk-destroy');
     });
 
     Route::prefix('admin/quotes')->name('admin.quotes.')->group(function () {
         Route::get('/', [AdminQuoteController::class, 'index'])->name('index');
+        Route::post('/bulk-destroy', [AdminQuoteController::class, 'bulkDestroy'])->name('bulk-destroy');
         Route::get('/{quote}', [AdminQuoteController::class, 'show'])->name('show');
+        Route::delete('/{quote}', [AdminQuoteController::class, 'destroy'])->name('destroy');
         Route::post('/{quote}/reply', [AdminQuoteController::class, 'reply'])->name('reply');
     });
 
@@ -34,6 +38,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
     Route::prefix('admin/galleries')->name('admin.')->group(function () {
         Route::resource('gallery-groups', \App\Http\Controllers\Admin\GalleryGroupController::class);
+        Route::post('gallery-groups/bulk-destroy', [\App\Http\Controllers\Admin\GalleryGroupController::class, 'bulkDestroy'])->name('gallery-groups.bulk-destroy');
         Route::post('gallery-groups/{gallery_group}/upload', [\App\Http\Controllers\Admin\GalleryController::class, 'upload'])->name('gallery-groups.upload');
         Route::post('gallery-groups/{gallery_group}/reorder', [\App\Http\Controllers\Admin\GalleryController::class, 'reorder'])->name('gallery-groups.reorder');
         Route::delete('gallery-items/{gallery}', [\App\Http\Controllers\Admin\GalleryController::class, 'destroy'])->name('gallery-items.destroy');

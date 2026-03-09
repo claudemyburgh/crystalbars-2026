@@ -70,4 +70,23 @@ class QuoteController extends Controller
 
         return redirect()->route('admin.quotes.show', $quote)->with('success', 'Reply sent successfully.');
     }
+
+    public function destroy(Quote $quote): RedirectResponse
+    {
+        $quote->delete();
+
+        return redirect()->back()->with('success', 'Quote deleted successfully.');
+    }
+
+    public function bulkDestroy(Request $request): RedirectResponse
+    {
+        $validated = $request->validate([
+            'ids' => 'required|array',
+            'ids.*' => 'exists:quotes,id',
+        ]);
+
+        Quote::whereIn('id', $validated['ids'])->delete();
+
+        return redirect()->back()->with('success', 'Quotes deleted successfully.');
+    }
 }

@@ -1,14 +1,23 @@
 import { Head, router } from '@inertiajs/react';
 import { Link } from '@inertiajs/react';
 import { format } from 'date-fns';
-import { Eye, Search } from 'lucide-react';
+import { Eye, Search, Trash2, AlertTriangle, Loader2 } from 'lucide-react';
 import { useEffect, useState } from 'react';
 import { index as quoteIndex } from '@/actions/App/Http/Controllers/Admin/QuoteController';
 import Heading from '@/components/heading';
 import { Pagination } from '@/components/pagination';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
+import { Checkbox } from '@/components/ui/checkbox';
 import { Input } from '@/components/ui/input';
+import {
+    Dialog,
+    DialogContent,
+    DialogDescription,
+    DialogFooter,
+    DialogHeader,
+    DialogTitle,
+} from '@/components/ui/dialog';
 import {
     Select,
     SelectContent,
@@ -25,7 +34,7 @@ import {
     TableRow,
 } from '@/components/ui/table';
 import AppLayout from '@/layouts/app-layout';
-import { show } from '@/routes/admin/quotes';
+import { show, destroy, bulkDestroy } from '@/routes/admin/quotes';
 import type { BreadcrumbItem } from '@/types';
 
 interface Quote {
@@ -69,6 +78,12 @@ export default function Index({ quotes, filters }: Props) {
     const [sort, setSort] = useState(filters.sort || 'created_at');
     const [direction, setDirection] = useState(filters.direction || 'desc');
     const [status, setStatus] = useState(filters.status || '');
+    const [selectedIds, setSelectedIds] = useState<number[]>([]);
+    
+    // Dialog state
+    const [isConfirmOpen, setIsConfirmOpen] = useState(false);
+    const [idsToDelete, setIdsToDelete] = useState<number[]>([]);
+    const [isDeleting, setIsDeleting] = useState(false);
 
     useEffect(() => {
         const delayDebounceFn = setTimeout(() => {
@@ -115,6 +130,66 @@ export default function Index({ quotes, filters }: Props) {
         return <Badge variant="destructive">Unread</Badge>;
     };
 
+    const handleSelectAll = (checked: boolean) => {
+        if (checked) {
+            setSelectedIds(quotes.data.map(q => q.id));
+        } else {
+            setSelectedIds([]);
+        }
+    };
+
+    const handleSelectOne = (checked: boolean, id: number) => {
+        if (checked) {
+            setSelectedIds(prev => [...prev, id]);
+        } else {
+            setSelectedIds(prev => prev.filter(i => i !== id));
+        }
+    };
+
+    const handleDelete = (id: number) => {
+        setIdsToDelete([id]);
+        setIsConfirmOpen(true);
+    };
+
+    const handleBulkDelete = () => {
+        if (selectedIds.length === 0) return;
+        setIdsToDelete(selectedIds);
+        setIsConfirmOpen(true);
+    };
+
+    function confirmDelete() {
+        if (idsToDelete.length === 0) return;
+        setIsDeleting(true);
+
+        if (idsToDelete.length === 1) {
+            router.delete(destroy.url(idsToDelete[0]), {
+                preserveScroll: true,
+                onSuccess: () => {
+                    setIsConfirmOpen(false);
+                    setIdsToDelete([]);
+                    setSelectedIds((prev) =>
+                        prev.filter((id) => id !== idsToDelete[0]),
+                    );
+                },
+                onFinish: () => setIsDeleting(false),
+            });
+        } else {
+            router.post(
+                bulkDestroy.url(),
+                { ids: idsToDelete },
+                {
+                    preserveScroll: true,
+                    onSuccess: () => {
+                        setIsConfirmOpen(false);
+                        setIdsToDelete([]);
+                        setSelectedIds([]);
+                    },
+                    onFinish: () => setIsDeleting(false),
+                },
+            );
+        }
+    }
+
     return (
         <AppLayout breadcrumbs={breadcrumbs}>
             <Head title="Quotes Management" />
@@ -160,12 +235,28 @@ export default function Index({ quotes, filters }: Props) {
                             </SelectContent>
                         </Select>
                     </div>
+                    {selectedIds.length > 0 && (
+                        <div className="flex items-center gap-2 ml-auto">
+                            <span className="text-sm text-muted-foreground">{selectedIds.length} selected</span>
+                            <Button variant="destructive" size="sm" onClick={handleBulkDelete}>
+                                <Trash2 className="mr-2 h-4 w-4" />
+                                Delete Selected
+                            </Button>
+                        </div>
+                    )}
                 </div>
 
                 <div className="rounded-md border">
                     <Table>
                         <TableHeader>
                             <TableRow>
+                                <TableHead className="w-[40px]">
+                                    <Checkbox 
+                                        checked={quotes.data.length > 0 && selectedIds.length === quotes.data.length}
+                                        onCheckedChange={handleSelectAll}
+                                        aria-label="Select all"
+                                    />
+                                </TableHead>
                                 <TableHead>Date</TableHead>
                                 <TableHead>Name</TableHead>
                                 <TableHead>Email</TableHead>
@@ -177,13 +268,20 @@ export default function Index({ quotes, filters }: Props) {
                         <TableBody>
                             {quotes.data.length === 0 ? (
                                 <TableRow>
-                                    <TableCell colSpan={6} className="h-24 text-center text-muted-foreground">
+                                    <TableCell colSpan={7} className="h-24 text-center text-muted-foreground">
                                         No quotes found.
                                     </TableCell>
                                 </TableRow>
                             ) : (
                                 quotes.data.map((quote) => (
-                                    <TableRow key={quote.id}>
+                                <TableRow key={quote.id}>
+                                        <TableCell>
+                                            <Checkbox 
+                                                checked={selectedIds.includes(quote.id)}
+                                                onCheckedChange={(checked) => handleSelectOne(!!checked, quote.id)}
+                                                aria-label="Select row"
+                                            />
+                                        </TableCell>
                                         <TableCell className="font-medium">
                                             {format(new Date(quote.created_at), 'MMM d, yyyy h:mm a')}
                                         </TableCell>
@@ -192,12 +290,16 @@ export default function Index({ quotes, filters }: Props) {
                                         <TableCell>{quote.phone}</TableCell>
                                         <TableCell>{getStatusBadge(quote)}</TableCell>
                                         <TableCell className="text-right">
-                                            <Button variant="ghost" size="sm" asChild>
-                                                <Link href={show({ quote: quote.id })}>
-                                                    <Eye className="mr-2 h-4 w-4" />
-                                                    View
-                                                </Link>
-                                            </Button>
+                                            <div className="flex justify-end gap-2">
+                                                <Button variant="ghost" size="icon" asChild>
+                                                    <Link href={show({ quote: quote.id })}>
+                                                        <Eye className="h-4 w-4" />
+                                                    </Link>
+                                                </Button>
+                                                <Button variant="ghost" size="icon" onClick={() => handleDelete(quote.id)}>
+                                                    <Trash2 className="h-4 w-4 text-destructive" />
+                                                </Button>
+                                            </div>
                                         </TableCell>
                                     </TableRow>
                                 ))
@@ -206,6 +308,47 @@ export default function Index({ quotes, filters }: Props) {
                     </Table>
                 </div>
                 <Pagination links={quotes.links} />
+
+                <Dialog open={isConfirmOpen} onOpenChange={setIsConfirmOpen}>
+                    <DialogContent>
+                        <DialogHeader>
+                            <DialogTitle className="flex items-center gap-2">
+                                <AlertTriangle className="h-5 w-5 text-destructive" />
+                                Confirm Deletion
+                            </DialogTitle>
+                            <DialogDescription>
+                                Are you sure you want to delete{' '}
+                                {idsToDelete.length === 1
+                                    ? 'this quote'
+                                    : `${idsToDelete.length} quotes`}
+                                ? This action cannot be undone.
+                            </DialogDescription>
+                        </DialogHeader>
+                        <DialogFooter>
+                            <Button
+                                variant="outline"
+                                onClick={() => setIsConfirmOpen(false)}
+                                disabled={isDeleting}
+                            >
+                                Cancel
+                            </Button>
+                            <Button
+                                variant="destructive"
+                                onClick={confirmDelete}
+                                disabled={isDeleting}
+                            >
+                                {isDeleting ? (
+                                    <>
+                                        <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                                        Deleting...
+                                    </>
+                                ) : (
+                                    'Delete'
+                                )}
+                            </Button>
+                        </DialogFooter>
+                    </DialogContent>
+                </Dialog>
             </div>
         </AppLayout>
     );
