@@ -25,6 +25,7 @@
         "@tailwindcss/vite": "^4.2.1",
         "@tanstack/react-table": "^8.21.3",
         "@types/canvas-confetti": "^1.9.0",
+        "@types/fslightbox-react": "^2.0.2",
         "@types/react": "^19.2.14",
         "@types/react-dom": "^19.2.3",
         "@vitejs/plugin-react": "^5.1.4",
@@ -33,12 +34,13 @@
         "clsx": "^2.1.1",
         "concurrently": "^9.2.1",
         "date-fns": "^4.1.0",
+        "fslightbox-react": "^2.0.3",
         "globals": "^15.15.0",
         "gsap": "^3.14.2",
         "input-otp": "^1.4.2",
         "laravel-vite-plugin": "^2.1.0",
         "lucide-react": "^0.475.0",
-        "motion": "^12.35.1",
+        "motion": "^12.35.2",
         "next-themes": "^0.4.6",
         "radix-ui": "^1.4.3",
         "react": "^19.2.4",
@@ -65,15 +67,15 @@
         "eslint-plugin-react-hooks": "^7.0.1",
         "prettier": "^3.8.1",
         "prettier-plugin-tailwindcss": "^0.6.14",
-        "typescript-eslint": "^8.56.1",
+        "typescript-eslint": "^8.57.0",
       },
       "optionalDependencies": {
         "@rollup/rollup-linux-x64-gnu": "4.9.5",
         "@rollup/rollup-win32-x64-msvc": "4.9.5",
         "@tailwindcss/oxide-linux-x64-gnu": "^4.2.1",
         "@tailwindcss/oxide-win32-x64-msvc": "^4.2.1",
-        "lightningcss-linux-x64-gnu": "^1.31.1",
-        "lightningcss-win32-x64-msvc": "^1.31.1",
+        "lightningcss-linux-x64-gnu": "^1.32.0",
+        "lightningcss-win32-x64-msvc": "^1.32.0",
       },
     },
   },
@@ -494,6 +496,8 @@
 
     "@types/estree": ["@types/estree@1.0.8", "", {}, "sha512-dWHzHa2WqEXI/O1E9OjrocMTKJl2mSrEolh1Iomrv6U+JuNwaHXsXx9bLu5gG7BUWFIN0skIQJQ/L1rIex4X6w=="],
 
+    "@types/fslightbox-react": ["@types/fslightbox-react@2.0.2", "", { "dependencies": { "@types/react": "*" } }, "sha512-ZU1lyLCtKY1mD1GfXLRCZQU/fZIkHQx9KQ7lGuVQEswHhuqoEKVA5r8dpwA2v1dpScqjnxvMx5tdKpNe8YOF/Q=="],
+
     "@types/json-schema": ["@types/json-schema@7.0.15", "", {}, "sha512-5+fP8P8MFNC+AyZCDxrB2pkZFPGzqQWUzpSeuuVLvm8VMcorNYavBqoFcxK8bQz4Qsbn4oUEEem4wDLfcysGHA=="],
 
     "@types/json5": ["@types/json5@0.0.29", "", {}, "sha512-dRLjCWHYg4oaA77cxO64oO+7JwCwnIzkZPdrrC71jQmQtlhM556pwKo5bUzqvZndkVbeFLIIi+9TC40JNF5hNQ=="],
@@ -767,6 +771,8 @@
     "framer-motion": ["framer-motion@12.35.2", "", { "dependencies": { "motion-dom": "^12.35.2", "motion-utils": "^12.29.2", "tslib": "^2.4.0" }, "peerDependencies": { "@emotion/is-prop-valid": "*", "react": "^18.0.0 || ^19.0.0", "react-dom": "^18.0.0 || ^19.0.0" }, "optionalPeers": ["@emotion/is-prop-valid", "react", "react-dom"] }, "sha512-dhfuEMaNo0hc+AEqyHiIfiJRNb9U9UQutE9FoKm5pjf7CMitp9xPEF1iWZihR1q86LBmo6EJ7S8cN8QXEy49AA=="],
 
     "fsevents": ["fsevents@2.3.3", "", { "os": "darwin" }, "sha512-5xoDfX+fL7faATnagmWPpbFtwh/R77WmMMqqHGS65C3vvB0YHrgF+B1YmZ3441tMj5n63k0212XNoJwzlhffQw=="],
+
+    "fslightbox-react": ["fslightbox-react@2.0.3", "", { "peerDependencies": { "react": ">=16.8.0", "react-dom": ">=16.8.0" } }, "sha512-/BfATEnWmcLUY9Aka+w0zEtC8pvwmFCQQpOBEIVSu3aMq35yJ3D1mxxdoon/O+EPvLFnOiSmflbEildaQ2lyEg=="],
 
     "function-bind": ["function-bind@1.1.2", "", {}, "sha512-7XHNxH7qX9xG5mIwxkhumTox/MIRNcOgDrxWsMt2pAr23WHp6MrRlN7FBSFpCpr+oVO0F744iUgR82nJMfG2SA=="],
 

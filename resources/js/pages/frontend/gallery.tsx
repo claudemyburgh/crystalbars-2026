@@ -1,12 +1,7 @@
 import { Head } from '@inertiajs/react';
-import { useState } from 'react';
+import FsLightbox from 'fslightbox-react';
 import { motion, AnimatePresence } from 'motion/react';
-import {
-    Dialog,
-    DialogContent,
-    DialogDescription,
-    DialogTitle,
-} from '@/components/ui/dialog';
+import { useState } from 'react';
 import Wrapper from '@/components/frontend/wrapper';
 import FrontendLayout from '@/layouts/frontend-layout';
 
@@ -24,7 +19,8 @@ export default function GalleryPage({ images = [] }: { images: Image[] }) {
     const [filter, setFilter] = useState<
         'all' | 'crystal-bars' | 'trellis-gates'
     >('all');
-    const [selectedImage, setSelectedImage] = useState<Image | null>(null);
+    const [toggler, setToggler] = useState(false);
+    const [slideIndex, setSlideIndex] = useState(1);
 
     const filteredImages = images.filter(
         (img) => filter === 'all' || img.group === filter,
@@ -134,7 +130,10 @@ export default function GalleryPage({ images = [] }: { images: Image[] }) {
                                 exit={{ opacity: 0, scale: 0.9 }}
                                 transition={{ duration: 0.3 }}
                                 key={image.id}
-                                onClick={() => setSelectedImage(image)}
+                                onClick={() => {
+                                    setSlideIndex(index + 1);
+                                    setToggler(!toggler);
+                                }}
                                 className={`group relative cursor-pointer overflow-hidden rounded-xl border bg-muted/30 shadow-sm transition-all hover:shadow-md ${getBentoClasses(index)}`}
                             >
                                 <img
@@ -155,31 +154,12 @@ export default function GalleryPage({ images = [] }: { images: Image[] }) {
                 </motion.div>
 
                 {/* Lightbox */}
-                <Dialog
-                    open={!!selectedImage}
-                    onOpenChange={(open) => !open && setSelectedImage(null)}
-                >
-                    <DialogContent className="max-w-5xl border-none bg-transparent p-0 shadow-none [&>button]:rounded-full [&>button]:border-[1px] [&>button]:border-white/20 [&>button]:bg-black/50 [&>button]:p-2 [&>button]:text-white [&>button]:hover:bg-white/10">
-                        <DialogTitle className="sr-only">
-                            Image View
-                        </DialogTitle>
-                        <DialogDescription className="sr-only">
-                            Viewing full size image
-                        </DialogDescription>
-                        {selectedImage && (
-                            <div className="relative flex h-full max-h-[90vh] w-full items-center justify-center p-2">
-                                <img
-                                    src={
-                                        selectedImage.url ||
-                                        selectedImage.original
-                                    }
-                                    alt={selectedImage.name}
-                                    className="max-h-[85vh] w-auto max-w-full rounded-md object-contain shadow-2xl"
-                                />
-                            </div>
-                        )}
-                    </DialogContent>
-                </Dialog>
+                <FsLightbox
+                    toggler={toggler}
+                    sources={filteredImages.map((img) => img.url || img.original)}
+                    slide={slideIndex}
+                    type="image"
+                />
             </Wrapper>
         </FrontendLayout>
     );
