@@ -15,7 +15,7 @@ import {
     Shield,
 } from 'lucide-react';
 import BarsImage from '@/../images/bars.webp';
-import WhatsAppImage from '@/../images/examples/WhatsApp Image 2022-11-19 at 17.39.40.jpg';
+import van from '@/../images/van.webp';
 import { BenefitCard } from '@/components/frontend/benefit-card';
 import HomeHero from '@/components/frontend/home-hero';
 import { QuickLinks } from '@/components/frontend/quick-links';
@@ -110,9 +110,9 @@ export default function HomePage({ faqs: dbFaqs }: HomePageProps) {
             <Head title="Home">
                 <meta
                     name="description"
-                    content="Crystal Bars — Quality trellis gates, security doors, and custom security solutions in South Africa."
+                    content="Crystal Bars - Quality trellis gates, security doors, and custom security solutions in South Africa."
                 />
-                <meta property="og:title" content="Crystal Bars — Home" />
+                <meta property="og:title" content="Crystal Bars | Home" />
                 <meta
                     property="og:description"
                     content="Quality trellis gates, security doors, and custom security solutions in South Africa."
@@ -437,7 +437,7 @@ export default function HomePage({ faqs: dbFaqs }: HomePageProps) {
                     <div className="grid grid-cols-1 gap-6 lg:grid-cols-2">
                         <div className="relative overflow-hidden rounded-2xl">
                             <img
-                                src={WhatsAppImage}
+                                src={van}
                                 alt="Professional installation"
                                 className="h-full w-full object-cover"
                             />

@@ -1,6 +1,6 @@
-import Gallery4 from '@/../images/examples/75279256_2426432367595402_7017356600314691584_n.jpg';
-import Gallery2 from '@/../images/examples/WhatsApp Image 2022-11-19 at 17.38.31.jpg';
-import Gallery3 from '@/../images/examples/WhatsApp Image 2022-11-19 at 17.38.32.jpg';
+import Gallery4 from '@/../images/examples/75279256_2426432367595402_7017356600314691584_n.webp';
+import Gallery2 from '@/../images/examples/WhatsApp Image 2022-11-19 at 17.38.31.webp';
+import Gallery3 from '@/../images/examples/WhatsApp Image 2022-11-19 at 17.38.32.webp';
 import Gallery1 from '@/../images/stand.webp';
 import Wrapper from '@/components/frontend/wrapper';
 import { Card } from '@/components/ui/card';
@@ -91,4 +91,3 @@ const Gallery = () => {
 };
 
 export default Gallery;
-

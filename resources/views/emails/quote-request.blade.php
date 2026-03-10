@@ -19,7 +19,7 @@ You have received a new quote request.
 ## Window/Trellis Details
 
 <x-mail::table>
-| Type          | Height (mm) | Drop (mm) | Quantity |
+| Type          | Width (mm) | Drop (Height) (mm) | Quantity |
 |:--------------|:------------|:----------|:---------|
 @foreach($data['windows'] as $window)
 | {{ ucwords(str_replace('-', ' ', $window['type'])) }} | {{ $window['height'] }} | {{ $window['drop'] }} | {{ $window['quantity'] }} |

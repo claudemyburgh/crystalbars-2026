@@ -1,4 +1,4 @@
-import { Head, useForm } from '@inertiajs/react';
+import { Head, useForm, usePoll } from '@inertiajs/react';
 import { format } from 'date-fns';
 import { Mail, Phone, User, Send } from 'lucide-react';
 import Heading from '@/components/heading';
@@ -55,6 +55,8 @@ interface Props {
 }
 
 export default function Show({ quote }: Props) {
+    usePoll(60000, { only: ['quote'] });
+
     const breadcrumbs: BreadcrumbItem[] = [
         {
             title: 'Quotes',
@@ -157,7 +159,7 @@ export default function Show({ quote }: Props) {
                                                     <TableRow>
                                                         <TableHead>Type</TableHead>
                                                         <TableHead>Width (mm)</TableHead>
-                                                        <TableHead>Drop (mm)</TableHead>
+                                                        <TableHead>Drop (Height) (mm)</TableHead>
                                                         <TableHead className="text-right">Qty</TableHead>
                                                     </TableRow>
                                                 </TableHeader>
@@ -188,7 +190,7 @@ export default function Show({ quote }: Props) {
                                     </CardDescription>
                                 </CardHeader>
                                 <CardContent>
-                                    <div className="grid gap-2">
+                                    <div className="grid gap-2 mb-4">
                                         <Label htmlFor="message">Your Message</Label>
                                         <Textarea
                                             id="message"
@@ -212,6 +214,6 @@ export default function Show({ quote }: Props) {
                     </div>
                 </div>
             </div>
-        </AppLayout>
+        </AppLayout >
     );
 }

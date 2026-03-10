@@ -1,6 +1,6 @@
 import { Link } from '@inertiajs/react';
 import { Phone, MessageCircle, Mail } from 'lucide-react';
-import BG from '@/../images/examples/10489802_1474159762822672_9219813355605679489_n.jpg';
+import BG from '@/../images/examples/10489802_1474159762822672_9219813355605679489_n.webp';
 import HendryImage from '@/../images/hendry.webp';
 import Wrapper from '@/components/frontend/wrapper';
 import { Button } from '@/components/ui/button';

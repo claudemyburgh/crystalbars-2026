@@ -1,7 +1,12 @@
 import { Head } from '@inertiajs/react';
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
-import { Dialog, DialogContent, DialogDescription, DialogTitle } from '@/components/ui/dialog';
+import {
+    Dialog,
+    DialogContent,
+    DialogDescription,
+    DialogTitle,
+} from '@/components/ui/dialog';
 import Wrapper from '@/components/frontend/wrapper';
 import FrontendLayout from '@/layouts/frontend-layout';
 
@@ -16,10 +21,14 @@ type Image = {
 };
 
 export default function GalleryPage({ images = [] }: { images: Image[] }) {
-    const [filter, setFilter] = useState<'all' | 'crystal-bars' | 'trellis-gates'>('all');
+    const [filter, setFilter] = useState<
+        'all' | 'crystal-bars' | 'trellis-gates'
+    >('all');
     const [selectedImage, setSelectedImage] = useState<Image | null>(null);
 
-    const filteredImages = images.filter((img) => filter === 'all' || img.group === filter);
+    const filteredImages = images.filter(
+        (img) => filter === 'all' || img.group === filter,
+    );
 
     // Simple pattern for bento grid alternating spans
     const getBentoClasses = (index: number) => {
@@ -36,11 +45,45 @@ export default function GalleryPage({ images = [] }: { images: Image[] }) {
 
     return (
         <FrontendLayout>
-            <Head title="Gallery" />
+            <Head title="Gallery">
+                <meta
+                    name="description"
+                    content="Browse our gallery of Crystal Bars and trellis gate installations across Cape Town, South Africa."
+                />
+                <meta property="og:title" content="Crystal Bars | Gallery" />
+                <meta
+                    property="og:description"
+                    content="View our portfolio of transparent polycarbonate burglar bars and trellis security gate installations."
+                />
+                <script
+                    type="application/ld+json"
+                    dangerouslySetInnerHTML={{
+                        __html: JSON.stringify({
+                            '@context': 'https://schema.org',
+                            '@type': 'LocalBusiness',
+                            name: 'Crystal Bars',
+                            url: 'https://crystalbars.co.za',
+                            telephone: '+27794912812',
+                            email: 'info@crystalbars.co.za',
+                            areaServed: 'ZA',
+                            sameAs: ['https://wa.me/27727554303'],
+                            contactPoint: [
+                                {
+                                    '@type': 'ContactPoint',
+                                    telephone: '+27794912812',
+                                    contactType: 'customer service',
+                                    availableLanguage: 'en',
+                                },
+                            ],
+                        }),
+                    }}
+                />
+            </Head>
             <Wrapper className="py-12">
                 <h1 className="text-3xl font-bold tracking-tight">Gallery</h1>
                 <p className="mt-2 text-muted-foreground">
-                    Browse our latest projects and installations of Crystal Bars and Trellis Gates.
+                    Browse our latest projects and installations of Crystal Bars
+                    and Trellis Gates.
                 </p>
 
                 {/* Filters */}
@@ -78,8 +121,8 @@ export default function GalleryPage({ images = [] }: { images: Image[] }) {
                 </div>
 
                 {/* Bento Grid Gallery */}
-                <motion.div 
-                    layout 
+                <motion.div
+                    layout
                     className="mt-8 grid auto-rows-[250px] grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4"
                 >
                     <AnimatePresence>
@@ -112,14 +155,24 @@ export default function GalleryPage({ images = [] }: { images: Image[] }) {
                 </motion.div>
 
                 {/* Lightbox */}
-                <Dialog open={!!selectedImage} onOpenChange={(open) => !open && setSelectedImage(null)}>
-                    <DialogContent className="max-w-5xl border-none bg-transparent p-0 shadow-none [&>button]:text-white [&>button]:hover:bg-white/10 [&>button]:bg-black/50 [&>button]:rounded-full [&>button]:p-2 [&>button]:border-[1px] [&>button]:border-white/20">
-                        <DialogTitle className="sr-only">Image View</DialogTitle>
-                        <DialogDescription className="sr-only">Viewing full size image</DialogDescription>
+                <Dialog
+                    open={!!selectedImage}
+                    onOpenChange={(open) => !open && setSelectedImage(null)}
+                >
+                    <DialogContent className="max-w-5xl border-none bg-transparent p-0 shadow-none [&>button]:rounded-full [&>button]:border-[1px] [&>button]:border-white/20 [&>button]:bg-black/50 [&>button]:p-2 [&>button]:text-white [&>button]:hover:bg-white/10">
+                        <DialogTitle className="sr-only">
+                            Image View
+                        </DialogTitle>
+                        <DialogDescription className="sr-only">
+                            Viewing full size image
+                        </DialogDescription>
                         {selectedImage && (
                             <div className="relative flex h-full max-h-[90vh] w-full items-center justify-center p-2">
                                 <img
-                                    src={selectedImage.url || selectedImage.original}
+                                    src={
+                                        selectedImage.url ||
+                                        selectedImage.original
+                                    }
                                     alt={selectedImage.name}
                                     className="max-h-[85vh] w-auto max-w-full rounded-md object-contain shadow-2xl"
                                 />

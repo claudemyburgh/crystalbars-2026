@@ -9,17 +9,54 @@ import {
 import { Button } from '@/components/ui/button';
 import FrontendLayout from '@/layouts/frontend-layout';
 import { quote } from '@/routes';
+import BarsImage from '@/../images/file.webp';
 
 type Faq = { id: number; question: string; answer: string };
 
 export default function FaqsPage({ faqs }: { faqs: Faq[] }) {
     return (
         <FrontendLayout>
-            <Head title="FAQs" />
+            <Head title="FAQs">
+                <meta
+                    name="description"
+                    content="Frequently asked questions about Crystal Bars transparent polycarbonate burglar bars, trellis gates, installations, and pricing in South Africa."
+                />
+                <meta property="og:title" content="Crystal Bars | FAQs" />
+                <meta
+                    property="og:description"
+                    content="Find answers to common questions about our transparent security bars, trellis gates, and professional installation services."
+                />
+                <script
+                    type="application/ld+json"
+                    dangerouslySetInnerHTML={{
+                        __html: JSON.stringify({
+                            '@context': 'https://schema.org',
+                            '@type': 'LocalBusiness',
+                            name: 'Crystal Bars',
+                            url: 'https://crystalbars.co.za',
+                            telephone: '+27794912812',
+                            email: 'info@crystalbars.co.za',
+                            areaServed: 'ZA',
+                            sameAs: ['https://wa.me/27727554303'],
+                            contactPoint: [
+                                {
+                                    '@type': 'ContactPoint',
+                                    telephone: '+27794912812',
+                                    contactType: 'customer service',
+                                    availableLanguage: 'en',
+                                },
+                            ],
+                        }),
+                    }}
+                />
+            </Head>
 
             <section className="relative isolate">
                 <div className="absolute inset-0 -z-10">
-                    <div className="h-full w-full bg-[url('/images/hero.jpg')] bg-cover bg-center opacity-60" />
+                    <div
+                        className="h-full w-full bg-cover bg-center opacity-60"
+                        style={{ backgroundImage: `url(${BarsImage})` }}
+                    />
                     <div className="absolute inset-0 bg-linear-to-br from-background/80 via-background/60 to-background/70" />
                 </div>
 

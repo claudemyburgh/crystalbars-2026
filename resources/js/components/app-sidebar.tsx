@@ -1,4 +1,4 @@
-import { Link, usePage } from '@inertiajs/react';
+import { Link, usePage, usePoll } from '@inertiajs/react';
 import { BookOpen,  Image, LayoutGrid, Square, Users } from 'lucide-react';
 import AppLogo from '@/components/app-logo';
 import { NavFooter } from '@/components/nav-footer';
@@ -35,6 +35,8 @@ const footerNavItems: NavItem[] = [
 
 export function AppSidebar() {
     const { unreadQuotesCount } = usePage<{ unreadQuotesCount: number }>().props;
+
+    usePoll(60000, { only: ['unreadQuotesCount'] });
 
     const mainNavItems: NavItem[] = [
         {

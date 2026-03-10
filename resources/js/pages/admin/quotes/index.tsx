@@ -1,4 +1,4 @@
-import { Head, router } from '@inertiajs/react';
+import { Head, router, usePoll } from '@inertiajs/react';
 import { Link } from '@inertiajs/react';
 import { format } from 'date-fns';
 import { Eye, Search, Trash2, AlertTriangle, Loader2 } from 'lucide-react';
@@ -80,6 +80,8 @@ export default function Index({ quotes, filters }: Props) {
     const [status, setStatus] = useState(filters.status || '');
     const [selectedIds, setSelectedIds] = useState<number[]>([]);
     
+    usePoll(60000, { only: ['quotes', 'unreadQuotesCount'] });
+
     // Dialog state
     const [isConfirmOpen, setIsConfirmOpen] = useState(false);
     const [idsToDelete, setIdsToDelete] = useState<number[]>([]);

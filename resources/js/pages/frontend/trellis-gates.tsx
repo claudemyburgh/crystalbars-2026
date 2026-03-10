@@ -20,21 +20,25 @@ import {
     TableHeader,
     TableRow,
 } from '@/components/ui/table';
-import { Tooltip, TooltipContent, TooltipTrigger } from '@/components/ui/tooltip';
+import {
+    Tooltip,
+    TooltipContent,
+    TooltipTrigger,
+} from '@/components/ui/tooltip';
 import FrontendLayout from '@/layouts/frontend-layout';
 import { quote } from '@/routes';
 
-import gallery1 from '../../../images/examples/10489802_1474159762822672_9219813355605679489_n.jpg';
-import gallery2 from '../../../images/examples/225357565_2953614061543894_502644624338730739_n.jpg';
-import gallery3 from '../../../images/examples/37403523_2103354546569854_5795604190340317184_n.jpg';
-import ctaImage from '../../../images/examples/42492207_10217443153776554_5487642962064048128_n.jpg';
-import gallery4 from '../../../images/examples/42513372_10217443138656176_9081619819526094848_n.jpg';
-import gallery5 from '../../../images/examples/42520445_10217443150256466_6765972413587914752_n.jpg';
-import gallery6 from '../../../images/examples/55949107_2279441115627862_8651684217282887680_n.jpg';
-import gallery7 from '../../../images/examples/74238133_2426432990928673_6319285601371684864_n.jpg';
-import featureExpand from '../../../images/examples/WhatsApp Image 2022-11-19 at 12.39.38.jpg';
-import featureLock from '../../../images/examples/WhatsApp Image 2022-11-19 at 17.39.31.jpg';
-import heroImage from '../../../images/examples/WhatsApp Image 2022-11-19 at 17.39.35.jpg';
+import gallery1 from '../../../images/examples/10489802_1474159762822672_9219813355605679489_n.webp';
+import gallery2 from '../../../images/examples/225357565_2953614061543894_502644624338730739_n.webp';
+import gallery3 from '../../../images/examples/37403523_2103354546569854_5795604190340317184_n.webp';
+import ctaImage from '../../../images/examples/42492207_10217443153776554_5487642962064048128_n.webp';
+import gallery4 from '../../../images/examples/42513372_10217443138656176_9081619819526094848_n.webp';
+import gallery5 from '../../../images/examples/42520445_10217443150256466_6765972413587914752_n.webp';
+import gallery6 from '../../../images/examples/55949107_2279441115627862_8651684217282887680_n.webp';
+import gallery7 from '../../../images/examples/74238133_2426432990928673_6319285601371684864_n.webp';
+import featureExpand from '../../../images/examples/WhatsApp Image 2022-11-19 at 12.39.38.webp';
+import featureLock from '../../../images/examples/WhatsApp Image 2022-11-19 at 17.38.32.webp';
+import heroImage from '../../../images/examples/WhatsApp Image 2022-11-19 at 17.39.35.webp';
 
 const colors = [
     { name: 'White', color: 'bg-white border-2 border-neutral-200' },
@@ -94,7 +98,43 @@ export default function TrellisGatesPage({
 }) {
     return (
         <FrontendLayout>
-            <Head title="Trellis Security Gates" />
+            <Head title="Trellis Security Gates">
+                <meta
+                    name="description"
+                    content="Premium aluminum trellis security gates in South Africa. Durable, stylish, and secure with free installation. Available in white, bronze, charcoal, and black."
+                />
+                <meta
+                    property="og:title"
+                    content="Crystal Bars | Trellis Security Gates"
+                />
+                <meta
+                    property="og:description"
+                    content="Premium aluminum trellis security gates with free installation. Available in multiple colors to match your home."
+                />
+                <script
+                    type="application/ld+json"
+                    dangerouslySetInnerHTML={{
+                        __html: JSON.stringify({
+                            '@context': 'https://schema.org',
+                            '@type': 'LocalBusiness',
+                            name: 'Crystal Bars',
+                            url: 'https://crystalbars.co.za',
+                            telephone: '+27794912812',
+                            email: 'info@crystalbars.co.za',
+                            areaServed: 'ZA',
+                            sameAs: ['https://wa.me/27727554303'],
+                            contactPoint: [
+                                {
+                                    '@type': 'ContactPoint',
+                                    telephone: '+27794912812',
+                                    contactType: 'customer service',
+                                    availableLanguage: 'en',
+                                },
+                            ],
+                        }),
+                    }}
+                />
+            </Head>
             <div className="min-h-screen bg-background">
                 <main>
                     {/* Hero Bento Grid */}
@@ -162,7 +202,9 @@ export default function TrellisGatesPage({
                                                     className={`h-10 w-10 cursor-pointer rounded-full border border-border shadow-sm transition-transform hover:scale-110 ${color.color}`}
                                                 />
                                             </TooltipTrigger>
-                                            <TooltipContent>{color.name}</TooltipContent>
+                                            <TooltipContent>
+                                                {color.name}
+                                            </TooltipContent>
                                         </Tooltip>
                                     ))}
                                 </div>
@@ -178,8 +220,8 @@ export default function TrellisGatesPage({
                                         R{' '}
                                         {trellises.length > 0
                                             ? new Intl.NumberFormat(
-                                                'en-ZA',
-                                            ).format(trellises[0].price)
+                                                  'en-ZA',
+                                              ).format(trellises[0].price)
                                             : '3,800'}
                                     </p>
                                 </div>
@@ -230,7 +272,7 @@ export default function TrellisGatesPage({
                     {/* Features Section */}
                     <section
                         id="features"
-                        className="bg-background py-16 lg:py-24"
+                        className="bg-background bg-radial-[at_50%_50%] from-primary/50 to-transparent to-50% py-16 lg:py-24"
                     >
                         <Wrapper>
                             <div className="mb-12 text-center lg:mb-16">
