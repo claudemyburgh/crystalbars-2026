@@ -164,7 +164,7 @@ export default function TrellisGatesPage({
                                         <Button
                                             size="lg"
                                             asChild
-                                            className="bg-primary text-primary-foreground hover:bg-primary/90"
+                                            variant={'secondary'}
                                         >
                                             <Link href={quote.url()}>
                                                 Get Started
@@ -173,8 +173,8 @@ export default function TrellisGatesPage({
                                         <Button
                                             size="lg"
                                             asChild
-                                            variant="outline"
-                                            className="border-white/30 bg-transparent text-white hover:bg-white/10"
+                                            variant="ghost"
+                                            className={`bg-white/10 text-white`}
                                         >
                                             <a href="#gallery">
                                                 View Collection
@@ -513,7 +513,7 @@ export default function TrellisGatesPage({
                                         <Button
                                             size="lg"
                                             asChild
-                                            className="bg-background text-foreground hover:bg-background/90"
+                                            variant={'secondary'}
                                         >
                                             <Link href={quote.url()}>
                                                 Contact Us Today
@@ -523,7 +523,7 @@ export default function TrellisGatesPage({
                                             size="lg"
                                             asChild
                                             variant="outline"
-                                            className="border-foreground border-white/30 text-foreground text-white hover:bg-foreground hover:bg-white/10 hover:text-background"
+                                            className="bg-background/25"
                                         >
                                             <Link href={quote.url()}>
                                                 Call Now
