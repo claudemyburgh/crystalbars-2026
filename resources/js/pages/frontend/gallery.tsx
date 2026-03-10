@@ -155,6 +155,7 @@ export default function GalleryPage({ images = [] }: { images: Image[] }) {
 
                 {/* Lightbox */}
                 <FsLightbox
+                    key={filter}
                     toggler={toggler}
                     sources={filteredImages.map((img) => img.url || img.original)}
                     slide={slideIndex}
