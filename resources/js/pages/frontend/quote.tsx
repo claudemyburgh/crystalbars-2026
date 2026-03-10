@@ -41,7 +41,8 @@ export default function QuotePage() {
             email: '',
             phone: '',
             message: '',
-            windows: [] as Window[], // Changed initial state to empty array with proper type
+            website_url: '',
+            windows: [] as Window[],
         });
 
     const success = () => {
@@ -423,6 +424,17 @@ export default function QuotePage() {
                             </div>
 
                             <div className="sm:col-span-2">
+                                <input
+                                    type="text"
+                                    name="website_url"
+                                    value={data.website_url}
+                                    onChange={(e) =>
+                                        setData('website_url', e.target.value)
+                                    }
+                                    style={{ display: 'none' }}
+                                    tabIndex={-1}
+                                    autoComplete="off"
+                                />
                                 <Button type="submit" disabled={processing}>
                                     {processing
                                         ? 'Requesting...'
